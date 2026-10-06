@@ -17,6 +17,10 @@
   const enc = (p) => {
     if (!p) return "";
     if (p.startsWith("http://") || p.startsWith("https://") || p.startsWith("//")) return p;
+    // Always serve hero loop and hero poster directly from repository
+    if (p.startsWith("assets/media/hero-loop") || p.startsWith("assets/media/hero-poster")) {
+      return p.replace(/^\/+/, "").split("/").map(encodeURIComponent).join("/");
+    }
     const encoded = p.replace(/^\/+/, "").split("/").map(encodeURIComponent).join("/");
     const base = mediaBase();
     return base ? `${base}/${encoded}` : encoded;
@@ -298,16 +302,46 @@
         .join("");
     }
 
-    // Live timecode on the hero HUD
+    // Hero background video setup & playback guarantee
     const v = $("#hero-video");
     const tc = $("#hero-tc");
-    if (v && tc) {
-      const tick = () => {
-        const t = v.currentTime || 0;
-        tc.textContent = `00:${pad(Math.floor(t))}:${pad(Math.floor((t % 1) * 30))}`;
-        requestAnimationFrame(tick);
+    if (v) {
+      v.muted = true;
+      v.playsInline = true;
+
+      const tryPlay = () => {
+        const p = v.play();
+        if (p !== undefined) {
+          p.catch(() => {
+            const unlock = () => {
+              v.play().catch(() => {});
+              window.removeEventListener("touchstart", unlock);
+              window.removeEventListener("scroll", unlock);
+              window.removeEventListener("click", unlock);
+            };
+            window.addEventListener("touchstart", unlock, { once: true, passive: true });
+            window.addEventListener("scroll", unlock, { once: true, passive: true });
+            window.addEventListener("click", unlock, { once: true, passive: true });
+          });
+        }
       };
-      tick();
+
+      if (v.readyState >= 2) {
+        tryPlay();
+      } else {
+        v.addEventListener("canplay", tryPlay, { once: true });
+        v.addEventListener("loadeddata", tryPlay, { once: true });
+        tryPlay();
+      }
+
+      if (tc) {
+        const tick = () => {
+          const t = v.currentTime || 0;
+          tc.textContent = `00:${pad(Math.floor(t))}:${pad(Math.floor((t % 1) * 30))}`;
+          requestAnimationFrame(tick);
+        };
+        tick();
+      }
     }
 
     // Contact form (front-end only — connect to Formspree/Netlify/your CRM to receive submissions)
@@ -820,15 +854,18 @@
     const base = mediaBase();
     if (!base) return;
     $$("img[src], source[src], video[poster]", root).forEach((el) => {
+      // Never rewrite hero media — hero video and poster are bundled in GitHub Pages
+      if (el.closest(".hero__media") || el.id === "hero-video") return;
+
       if (el.hasAttribute("src")) {
         const src = el.getAttribute("src");
-        if (src && !src.startsWith("http") && !src.startsWith("//") && (src.startsWith("students/") || src.startsWith("assets/media/"))) {
+        if (src && !src.startsWith("http") && !src.startsWith("//") && src.startsWith("students/")) {
           el.setAttribute("src", enc(src));
         }
       }
       if (el.hasAttribute("poster")) {
         const poster = el.getAttribute("poster");
-        if (poster && !poster.startsWith("http") && !poster.startsWith("//") && (poster.startsWith("students/") || poster.startsWith("assets/media/"))) {
+        if (poster && !poster.startsWith("http") && !poster.startsWith("//") && poster.startsWith("students/")) {
           el.setAttribute("poster", enc(poster));
         }
       }

@@ -8,8 +8,11 @@ desktop.ini
 .vscode/
 .idea/
 
-# Large media files offloaded to AWS S3
-*.mp4
+# Large student video files offloaded to AWS S3 (20MB - 214MB)
+students/**/*.mp4
+
+# Retain lightweight hero loop (828 KB) directly in repository
+!assets/media/hero-loop.mp4
 
 # Temporary logs
 *.log
