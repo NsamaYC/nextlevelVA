@@ -1,0 +1,410 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Next Level — Private Tennis Coaching &amp; Video Analysis</title>
+  <meta name="description" content="Next Level offers elite private tennis coaching and video analysis. Explore player profiles, personal drill libraries, and frame-by-frame stroke breakdowns.">
+  
+  <!-- Typography -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  
+  <link rel="stylesheet" href="assets/css/styles.css">
+</head>
+<body data-page="home">
+
+  <!-- Header slot (populated by app.js) -->
+  <div id="site-header"></div>
+
+  <!-- Hero Section -->
+  <section class="hero" id="hero">
+    <div class="container">
+      <h1 class="display hero__title">
+        <span class="line"><span>SWING WITH</span></span>
+        <span class="line"><span>CONFIDENCE</span></span>
+      </h1>
+      
+      <div class="hero__media">
+        <video id="hero-video" autoplay muted loop playsinline poster="assets/media/hero-poster.jpg">
+          <source src="assets/media/hero-loop.mp4" type="video/mp4">
+        </video>
+        
+        <div class="hud" aria-hidden="true">
+          <i></i><i></i><i></i><i></i>
+          <span class="hud__rec">ANALYSIS REC</span>
+          <span class="hud__tc" id="hero-tc">00:00:00</span>
+        </div>
+        
+        <div class="hero__center">
+          <span class="label">LEARN MORE</span>
+          <a href="#services" class="circle-btn" aria-label="Scroll to explore services">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5v14M6 13l6 6 6-6"/></svg>
+          </a>
+        </div>
+        
+        <div class="hero__bottom">
+          <span class="display">ELEVATE YOUR GAME</span>
+          <span class="hero__meta">Private Coaching · High-Speed Video Analysis · Custom Drills</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Marquee Banner -->
+  <div class="marquee" aria-hidden="true">
+    <div class="marquee__track">
+      <div class="marquee__group">
+        <span class="marquee__item">PRIVATE COACHING</span>
+        <svg class="marquee__dot" viewBox="0 0 14 14" fill="currentColor"><circle cx="7" cy="7" r="5"/></svg>
+        <span class="marquee__item">VIDEO ANALYSIS</span>
+        <svg class="marquee__dot" viewBox="0 0 14 14" fill="currentColor"><circle cx="7" cy="7" r="5"/></svg>
+        <span class="marquee__item">STROKE BIOMECHANICS</span>
+        <svg class="marquee__dot" viewBox="0 0 14 14" fill="currentColor"><circle cx="7" cy="7" r="5"/></svg>
+        <span class="marquee__item">PERSONALIZED DRILLS</span>
+        <svg class="marquee__dot" viewBox="0 0 14 14" fill="currentColor"><circle cx="7" cy="7" r="5"/></svg>
+        <span class="marquee__item">TACTICAL IQ</span>
+        <svg class="marquee__dot" viewBox="0 0 14 14" fill="currentColor"><circle cx="7" cy="7" r="5"/></svg>
+        <span class="marquee__item">NEXT LEVEL TENNIS</span>
+        <svg class="marquee__dot" viewBox="0 0 14 14" fill="currentColor"><circle cx="7" cy="7" r="5"/></svg>
+      </div>
+      <div class="marquee__group">
+        <span class="marquee__item">PRIVATE COACHING</span>
+        <svg class="marquee__dot" viewBox="0 0 14 14" fill="currentColor"><circle cx="7" cy="7" r="5"/></svg>
+        <span class="marquee__item">VIDEO ANALYSIS</span>
+        <svg class="marquee__dot" viewBox="0 0 14 14" fill="currentColor"><circle cx="7" cy="7" r="5"/></svg>
+        <span class="marquee__item">STROKE BIOMECHANICS</span>
+        <svg class="marquee__dot" viewBox="0 0 14 14" fill="currentColor"><circle cx="7" cy="7" r="5"/></svg>
+        <span class="marquee__item">PERSONALIZED DRILLS</span>
+        <svg class="marquee__dot" viewBox="0 0 14 14" fill="currentColor"><circle cx="7" cy="7" r="5"/></svg>
+        <span class="marquee__item">TACTICAL IQ</span>
+        <svg class="marquee__dot" viewBox="0 0 14 14" fill="currentColor"><circle cx="7" cy="7" r="5"/></svg>
+        <span class="marquee__item">NEXT LEVEL TENNIS</span>
+        <svg class="marquee__dot" viewBox="0 0 14 14" fill="currentColor"><circle cx="7" cy="7" r="5"/></svg>
+      </div>
+    </div>
+  </div>
+
+  <!-- Services Section -->
+  <section class="section" id="services">
+    <div class="container">
+      <div class="section-head section-head--split reveal">
+        <div>
+          <span class="eyebrow">What We Offer</span>
+          <h2 class="display h-xl" style="margin-top:16px">Our Two Pillars</h2>
+        </div>
+        <p class="lead">
+          We combine intensive on-court private coaching with precision video analysis. Every player receives dedicated feedback, personalized drills, and a digital archive of their progression.
+        </p>
+      </div>
+
+      <div class="services">
+        <!-- Pillar 1: Private Coaching -->
+        <article class="service reveal">
+          <div class="service__media">
+            <img src="students/Kegan B/Profile/slideshow/kb-forehand.png" alt="Private Tennis Coaching on Court" loading="lazy">
+            <span class="chip chip--lime service__num">01 / TRAINING</span>
+          </div>
+          <div class="service__body">
+            <span class="eyebrow">On-Court Instruction</span>
+            <h3 class="display h-md">Private Tennis Coaching</h3>
+            <p>
+              1-on-1 personalized court sessions customized to your competitive goals. We focus on kinetic chain power generation, explosive footwork, tactical depth, and closing out big points with authority.
+            </p>
+            <ul class="service__list">
+              <li>Stroke mechanics &amp; timing</li>
+              <li>Explosive court movement</li>
+              <li>Pattern recognition &amp; tactics</li>
+              <li>Pressure match play simulation</li>
+            </ul>
+            <div style="margin-top: 14px;">
+              <a class="btn" href="#contact">Book Coaching Session <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+            </div>
+          </div>
+        </article>
+
+        <!-- Pillar 2: Video Analysis -->
+        <article class="service reveal" data-delay="2">
+          <div class="service__media">
+            <img src="assets/media/posters/madison-s-videos-side-forhand.jpg" alt="Video Analysis Session" loading="lazy">
+            <span class="chip chip--lime service__num">02 / DIAGNOSTIC</span>
+          </div>
+          <div class="service__body">
+            <span class="eyebrow">Frame-By-Frame Insights</span>
+            <h3 class="display h-md">High-Speed Video Analysis</h3>
+            <p>
+              The eye cannot catch what high-speed cameras reveal. We break down your swing path, contact point, unit turn coil, and follow-through so you can see exactly where adjustments produce immediate results.
+            </p>
+            <ul class="service__list">
+              <li>Multi-angle capture (Front &amp; Side)</li>
+              <li>Biomechanics diagnostics</li>
+              <li>Personal online video catalog</li>
+              <li>Targeted corrective drills</li>
+            </ul>
+            <div style="margin-top: 14px;">
+              <a class="btn" href="#analysis">See Video Analysis <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+            </div>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- About Section -->
+  <section class="section section--court" id="about">
+    <div class="container">
+      <div class="about">
+        <div class="about__media reveal">
+          <div class="about__img">
+            <img src="students/Madison S/Profile/slideshow/madison-in-action.png" alt="Coach and student on court" loading="lazy">
+          </div>
+          <div class="float-card float-card--a" aria-hidden="true">
+            <h4>KINETIC CHAIN COIL</h4>
+            <ul>
+              <li><span class="dot" style="background:var(--lime)"></span><span>Hip Activation: <b>Optimal</b></span></li>
+              <li><span class="dot" style="background:var(--court)"></span><span>Contact In Front: <b>+14%</b></span></li>
+            </ul>
+            <div class="bar"><span style="width: 88%"></span></div>
+          </div>
+          <div class="float-card float-card--b" aria-hidden="true">
+            <h4>ANALYSIS REPORT</h4>
+            <ul>
+              <li><span class="dot" style="background:#22c55e"></span><span>Unit Turn: <b>Verified</b></span></li>
+              <li><span class="dot" style="background:var(--clay)"></span><span>2nd Serve Pronation: <b>In Progress</b></span></li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="about__body reveal" data-delay="2">
+          <span class="eyebrow">About Next Level</span>
+          <h2 class="display h-xl">Precision Coaching.<br>Proven Progression.</h2>
+          <p class="lead">
+            Traditional tennis coaching often relies on subjective observations. At <span class="hl">Next Level</span>, we combine experienced technical coaching with high-definition video diagnostics to eliminate guesswork.
+          </p>
+          <p>
+            Whether preparing for junior tournaments or fine-tuning adult competitive play, our players don't just practice reps—they study their strokes, understand the biomechanical reasons behind every cue, and practice custom drills specifically developed for their profile.
+          </p>
+          <div style="display:flex;gap:16px;flex-wrap:wrap;margin-top:12px;">
+            <a class="btn btn--lime" href="#players">View Student Profiles <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+            <a class="btn btn--light" href="#contact">Schedule Consultation</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Process / How It Works -->
+  <section class="section section--white" id="process">
+    <div class="container">
+      <div class="section-head reveal">
+        <span class="eyebrow">The Next Level Method</span>
+        <h2 class="display h-xl">How We Develop Champions</h2>
+      </div>
+
+      <div class="process reveal">
+        <div class="process__step">
+          <div class="process__num">01</div>
+          <h3>Capture</h3>
+          <p>We record high-frame-rate footage from multiple angles during live rallies, serves, and match situations.</p>
+        </div>
+        <div class="process__step">
+          <div class="process__num">02</div>
+          <h3>Diagnose</h3>
+          <p>We break down kinetic sequencing: stance, balance, shoulder coil, contact point, and racket deceleration.</p>
+        </div>
+        <div class="process__step">
+          <div class="process__num">03</div>
+          <h3>Prescribe</h3>
+          <p>We build tailored training drills addressing exact weaknesses with clear progression stages.</p>
+        </div>
+        <div class="process__step">
+          <div class="process__num">04</div>
+          <h3>Elevate</h3>
+          <p>Players access their personalized profile online, tracking their evolution and unlocking higher match confidence.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Video Analysis Breakdown Demo -->
+  <section class="section section--dark" id="analysis">
+    <div class="container">
+      <div class="section-head section-head--split reveal">
+        <div>
+          <span class="eyebrow">Visual Diagnostics</span>
+          <h2 class="display h-xl">Frame-by-Frame Video Technology</h2>
+        </div>
+        <p class="lead">
+          See your biomechanics at full speed and slow motion. Every student receives a dedicated video catalog with coach annotations and key checkpoints.
+        </p>
+      </div>
+
+      <div class="analysis reveal">
+        <div class="analysis__frame">
+          <img src="students/Kegan B/Profile/slideshow/kb-bh-side.png" alt="Video analysis stroke breakdown demonstration" loading="lazy">
+          
+          <svg class="analysis__overlay" viewBox="0 0 848 584" fill="none" preserveAspectRatio="none">
+            <!-- Stroke path line -->
+            <path class="draw" d="M 520,110 C 490,160 480,240 500,310 C 515,350 490,420 380,480" stroke="#d9f24a" stroke-width="3" stroke-linecap="round" stroke-dasharray="8 6"/>
+            <!-- Angle indicator circle -->
+            <circle cx="505" cy="305" r="26" stroke="#22c55e" stroke-width="2.5" fill="rgba(34,197,94,0.15)"/>
+            <!-- Target crosshair -->
+            <circle cx="380" cy="480" r="14" stroke="#ff4d3d" stroke-width="2"/>
+            <line x1="360" y1="480" x2="400" y2="480" stroke="#ff4d3d" stroke-width="1.5"/>
+            <line x1="380" y1="460" x2="380" y2="500" stroke="#ff4d3d" stroke-width="1.5"/>
+          </svg>
+
+          <div class="hud" aria-hidden="true">
+            <i></i><i></i><i></i><i></i>
+            <span class="hud__rec">MOTION TRACKING</span>
+            <span class="hud__tc">FRAME 0142 / 0240</span>
+          </div>
+
+          <div class="analysis__timeline" aria-hidden="true">
+            <span>00:03:12</span>
+            <div class="track">
+              <span></span>
+              <div class="marks">
+                <i style="left:24%"></i>
+                <i style="left:52%"></i>
+                <i style="left:82%"></i>
+              </div>
+            </div>
+            <span>30 FPS HD</span>
+          </div>
+        </div>
+
+        <div>
+          <ul class="analysis__points">
+            <li class="reveal" data-delay="1">
+              <span class="n">01</span>
+              <div>
+                <h3>Unit Turn &amp; Shoulder Coil</h3>
+                <p>Early preparation when the ball crosses the net. Hip-shoulder separation creates stored rotational energy.</p>
+              </div>
+            </li>
+            <li class="reveal" data-delay="2">
+              <span class="n">02</span>
+              <div>
+                <h3>Contact Point in Front</h3>
+                <p>Arm extension maintained with firm wrist through impact zone for optimal ball compression and pace.</p>
+              </div>
+            </li>
+            <li class="reveal" data-delay="3">
+              <span class="n">03</span>
+              <div>
+                <h3>Controlled Topspin Finish</h3>
+                <p>Smooth low-to-high trajectory with high finish over the shoulder, enabling deep court penetration.</p>
+              </div>
+            </li>
+          </ul>
+          <div style="margin-top:28px;">
+            <a class="btn btn--lime" href="#players">Browse Player Profiles <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Player Profiles Section -->
+  <section class="section" id="players">
+    <div class="container">
+      <div class="section-head section-head--split reveal">
+        <div>
+          <span class="eyebrow">Student Roster</span>
+          <h2 class="display h-xl" style="margin-top:16px">Player Profiles</h2>
+        </div>
+        <p class="lead">
+          Explore our student portals. Each student has a complete profile including their comprehensive coach evaluation, personalized training drills, and full video catalog.
+        </p>
+      </div>
+
+      <!-- Injected by app.js from NL_CONTENT.players (Kegan Barkley & Madison Staine) -->
+      <div class="players-grid" id="players-grid"></div>
+    </div>
+  </section>
+
+  <!-- Contact & Booking CTA -->
+  <section class="section section--paper-2" id="contact">
+    <div class="container">
+      <div class="cta">
+        <div class="reveal">
+          <span class="eyebrow">Get Started</span>
+          <h2 class="display h-xl" style="margin-top:16px">Ready To Take Your Game To The Next Level?</h2>
+          <p class="lead" style="margin-top:16px">
+            Book private coaching sessions or schedule a video analysis package. We work with dedicated players of all ages striving for competitive excellence.
+          </p>
+          <div class="cta__services">
+            <span class="chip chip--dark">Private Coaching</span>
+            <span class="chip chip--dark">Video Analysis</span>
+            <span class="chip chip--dark">Match Play Strategy</span>
+            <span class="chip chip--lime">Tournament Prep</span>
+          </div>
+          <div style="margin-top: 36px; display: grid; gap: 12px; font-size: 0.95rem; color: var(--ink-2);">
+            <div style="display: flex; gap: 12px; align-items: center;">
+              <span class="circle-btn" style="width: 38px; height: 38px; flex: none; animation: none;">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+              </span>
+              <span>Direct Coaching Inquiries &amp; Evaluations</span>
+            </div>
+            <div style="display: flex; gap: 12px; align-items: center;">
+              <span class="circle-btn" style="width: 38px; height: 38px; flex: none; animation: none;">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
+              </span>
+              <span>Flexible Weekday &amp; Weekend Training Slots</span>
+            </div>
+          </div>
+        </div>
+
+        <form class="form reveal" id="contact-form" data-delay="2">
+          <div class="field">
+            <label for="c-name">Full Name *</label>
+            <input type="text" id="c-name" name="name" required placeholder="Your name">
+          </div>
+          <div class="field">
+            <label for="c-email">Email Address *</label>
+            <input type="email" id="c-email" name="email" required placeholder="you@domain.com">
+          </div>
+          <div class="field">
+            <label for="c-phone">Phone Number</label>
+            <input type="tel" id="c-phone" name="phone" placeholder="(555) 000-0000">
+          </div>
+          <div class="field">
+            <label for="c-service">Service Interested In *</label>
+            <select id="c-service" name="service" required>
+              <option value="" disabled selected>Select a program</option>
+              <option value="coaching">Private Coaching</option>
+              <option value="video">Video Analysis Package</option>
+              <option value="both">Coaching + Video Analysis Bundle</option>
+              <option value="junior">Junior Tournament Training</option>
+            </select>
+          </div>
+          <div class="field full">
+            <label for="c-msg">Player Background &amp; Goals</label>
+            <textarea id="c-msg" name="message" placeholder="Current level, tournament experience, or specific strokes you wish to improve..."></textarea>
+          </div>
+          <div class="full">
+            <button type="submit" class="btn btn--dark" style="width: 100%;">
+              Submit Consultation Request <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+            </button>
+          </div>
+          <div class="form__success" role="alert">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" style="width:22px;height:22px;"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg>
+            <span>Thank you! Your coaching inquiry has been submitted. A coach will be in touch with you shortly.</span>
+          </div>
+        </form>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer slot (populated by app.js) -->
+  <div id="site-footer"></div>
+
+  <!-- Scripts -->
+  <script src="assets/js/config.js"></script>
+  <script src="assets/js/media-manifest.js"></script>
+  <script src="assets/js/content.js"></script>
+  <script src="assets/js/app.js"></script>
+</body>
+</html>

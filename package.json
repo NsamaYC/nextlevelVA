@@ -1,0 +1,14 @@
+{
+  "name": "next-level-tennis",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Next Level — private tennis coaching & video analysis website",
+  "scripts": {
+    "media": "node tools/build-media.mjs",
+    "sync:s3": "node tools/sync-to-s3.mjs",
+    "dev": "npx -y http-server . -p 5173 -c-1"
+  },
+  "devDependencies": {
+    "ffmpeg-static": "^5.2.0"
+  }
+}

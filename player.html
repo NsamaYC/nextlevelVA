@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Player Profile — Next Level Tennis</title>
+  <meta name="description" content="Next Level student player profile: training report, stroke analysis, personal drills and video catalog.">
+  
+  <!-- Typography -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  
+  <link rel="stylesheet" href="assets/css/styles.css">
+</head>
+<body data-page="player">
+
+  <!-- Header slot (populated by app.js) -->
+  <div id="site-header"></div>
+
+  <!-- Dynamic Player App Container (populated by renderPlayer() in app.js) -->
+  <main id="app">
+    <div class="empty container">
+      <h1 class="display h-xl">Loading Player Profile...</h1>
+    </div>
+  </main>
+
+  <!-- Footer slot (populated by app.js) -->
+  <div id="site-footer"></div>
+
+  <!-- Scripts -->
+  <script src="assets/js/config.js"></script>
+  <script src="assets/js/media-manifest.js"></script>
+  <script src="assets/js/content.js"></script>
+  <script src="assets/js/app.js"></script>
+</body>
+</html>

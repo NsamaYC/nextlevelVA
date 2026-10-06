@@ -1,0 +1,15 @@
+# Dependencies
+node_modules/
+
+# OS / Editor files
+.DS_Store
+Thumbs.db
+desktop.ini
+.vscode/
+.idea/
+
+# Large media files offloaded to AWS S3
+*.mp4
+
+# Temporary logs
+*.log
