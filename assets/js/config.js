@@ -20,6 +20,6 @@
  * be prefixed with this base URL.
  */
 window.NL_CONFIG = {
-  // Set your AWS CloudFront or S3 bucket URL below:
-  mediaBaseUrl: ""
+  // Connected AWS S3 bucket endpoint (us-east-2)
+  mediaBaseUrl: "https://nextlevel-tennis-media-312392183301-us-east-2-an.s3.us-east-2.amazonaws.com"
 };
