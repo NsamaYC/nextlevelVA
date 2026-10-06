@@ -4,66 +4,127 @@ A modern web application built for **Next Level Tennis**, showcasing private ten
 
 ---
 
-## 🎾 Features
+## 🎾 Project Highlights
 
-1. **Editorial Modern Tennis Aesthetic**
-   - Direct inspiration from modern tennis academy layouts: high-impact Bebas Neue display typography, rich court green & tennis-ball lime accents, rounded media viewports, and custom video analysis HUDs.
-   - Micro-animations, frame-by-frame overlays, and smooth transitions.
-
-2. **Home Page (`index.html`)**
-   - **Hero Section**: High-frame-rate video loop with viewfinder HUD, animated typography ("SWING WITH CONFIDENCE" & "ELEVATE YOUR GAME"), and quick jump button.
-   - **Two Pillars**: Breakdown of **Private Coaching** and **Video Analysis**.
-   - **About Section**: Interactive statistics and training philosophy.
-   - **Diagnostic Showcase**: Frame-by-frame breakdown diagram with motion tracking overlays.
-   - **Player Profiles Grid**: Cards for each enrolled student displaying their training report date, drill count, video count, and direct link to their profile.
-   - **Booking & Consultation Form**: Interactive session request form.
-
-3. **Player Profile Pages (`player.html?id=...`)**
-   - **Complete Training Reports**: Full strengths, weaknesses, and stroke-by-stroke breakdowns (forehand, backhand, serve) transcribed directly from player report files.
-   - **Media-Rich Photo Slideshow**: Full autoplay, swipeable, and keyboard-controllable carousel displaying student action photos.
-   - **Personalized Drill Library**: Direct access to all drills custom-assigned to that student.
-   - **Video Catalog**: Positioned at the bottom of the page for rapid access, featuring custom thumbnail posters, video durations, and full-screen video lightbox player.
-
-4. **Dedicated Drill Pages (`drill.html?player=...&drill=...`)**
-   - Embedded high-definition video demonstration with play-on-demand optimization.
-   - Structured drill copy: **Core Technical Elements**, **Technical Breakdown**, **Coach's Checklist**, and **Beginner / Advanced** practice progressions.
-   - Interactive court positioning diagrams and drill photos with click-to-zoom.
-   - Drill-to-drill navigation pager and back-to-profile links.
-
-5. **Students Included**
-   - **Kegan Barkley** (`students/Kegan B`)
-     - 6 Specialized Drills (Forehand, Backhand Front View, Backhand Side View, Forehand Backhand Cross Court, Forehand Going Forward & Backward, Side Serve)
-     - 4 Analysis Videos
-     - 6 Slideshow Photos
-   - **Madison Staine** (`students/Madison S`)
-     - 2 Specialized Drills (Attacking with Forehand Cross Court, Under the Rope Going Forward)
-     - 2 Analysis Videos
-     - 6 Slideshow Photos
+- **Lean Repository**: Source code, lightweight posters, and copy are ~7 MB, ready for instant GitHub Pages deployment.
+- **AWS S3 / CloudFront Media Offloading**: Heavy MP4 video files (up to 214 MB each) are offloaded to AWS, preventing GitHub's 100 MB file limit from blocking deployments.
+- **Dynamic Configuration**: `assets/js/config.js` seamlessly switches between local assets and remote AWS CloudFront / S3 media.
 
 ---
 
-## 🚀 Running Locally
+## 🚀 Deployment Guide: GitHub Pages + AWS S3
 
-To run the site locally:
+### Step 1: Create an S3 Bucket in AWS
 
+1. Log into your [AWS Management Console](https://console.aws.amazon.com/) and navigate to **Amazon S3**.
+2. Click **Create bucket**:
+   - **Bucket name**: e.g., `nextlevel-tennis-media` *(must be globally unique)*
+   - **AWS Region**: `us-east-2 (US East - Ohio)` *(or your preferred region)*
+   - **Block Public Access**: Uncheck *Block all public access* and check the confirmation box.
+3. Click **Create bucket**.
+
+---
+
+### Step 2: Configure Bucket Policy & CORS
+
+#### A. Bucket Policy (Allow Public Read)
+1. In your bucket, go to the **Permissions** tab.
+2. Scroll to **Bucket policy** and click **Edit**.
+3. Paste the following (replace `YOUR-BUCKET-NAME` with your actual bucket name):
+
+```json
+{
+  "Version": "2012-10-17",
+  "Statement": [
+    {
+      "Sid": "PublicReadGetObject",
+      "Effect": "Allow",
+      "Principal": "*",
+      "Action": "s3:GetObject",
+      "Resource": "arn:aws:s3:::YOUR-BUCKET-NAME/*"
+    }
+  ]
+}
+```
+4. Click **Save changes**.
+
+#### B. Cross-Origin Resource Sharing (CORS)
+*(Crucial for streaming video with scrubbing / range requests across domains)*
+1. On the same **Permissions** tab, scroll to **Cross-origin resource sharing (CORS)** and click **Edit**.
+2. Paste the following configuration:
+
+```json
+[
+  {
+    "AllowedHeaders": ["*"],
+    "AllowedMethods": ["GET", "HEAD"],
+    "AllowedOrigins": ["*"],
+    "ExposeHeaders": ["ETag", "Content-Range", "Accept-Ranges", "Content-Length"],
+    "MaxAgeSeconds": 3000
+  }
+]
+```
+3. Click **Save changes**.
+
+---
+
+### Step 3: Upload Media to S3
+
+#### Method A: Using the built-in sync command (Fastest)
+If you have AWS CLI credentials configured:
 ```bash
-# Start the local development server:
-npm run dev
+npm run sync:s3 <YOUR-BUCKET-NAME> us-east-2
+```
+Or directly with the AWS CLI:
+```bash
+aws s3 sync students/ s3://YOUR-BUCKET-NAME/students/
+aws s3 sync assets/media/ s3://YOUR-BUCKET-NAME/assets/media/
 ```
 
-Then open your browser to [http://localhost:5173](http://localhost:5173).
+#### Method B: Drag & Drop via AWS Web Console
+1. In your S3 bucket, click **Upload**.
+2. Upload the `students` folder and the `assets/media` folder.
 
 ---
 
-## 🛠 Rebuilding Media & Adding Students
+### Step 4: Link Your S3 Bucket in `assets/js/config.js`
 
-When adding new student folders or videos:
+Open `assets/js/config.js` and set your S3 or CloudFront URL:
 
-1. Place the student folder under `students/<Student Name>/`.
-2. Ensure it contains `Profile/`, `Drills/`, and `Videos/`.
-3. Update `assets/js/content.js` with the student's text copy.
-4. Run:
-   ```bash
-   npm run media
-   ```
-   This will automatically extract video poster thumbnails, probe video durations, and update `assets/js/media-manifest.js`.
+```javascript
+window.NL_CONFIG = {
+  mediaBaseUrl: "https://YOUR-BUCKET-NAME.s3.us-east-2.amazonaws.com"
+  // Or CloudFront: "https://d123456abcdef.cloudfront.net"
+};
+```
+
+---
+
+### Step 5: Deploy to GitHub Pages
+
+1. Create a new repository on GitHub (e.g. `nextlevel-tennis`).
+2. In your terminal, link and push:
+```bash
+git remote add origin https://github.com/YOUR-USERNAME/nextlevel-tennis.git
+git branch -M main
+git push -u origin main
+```
+3. In your GitHub repository:
+   - Go to **Settings** > **Pages**.
+   - Under **Build and deployment** > **Source**, choose **GitHub Actions** *(the included `.github/workflows/deploy.yml` workflow will automatically deploy)*.
+   - Alternatively, choose **Deploy from a branch** -> `main` -> `/ (root)` -> Save.
+
+Your site will be live at `https://<YOUR-USERNAME>.github.io/nextlevel-tennis/`!
+
+---
+
+## 💻 Local Development
+
+```bash
+# Start local server:
+npm run dev
+
+# Re-extract video posters if new clips are added:
+npm run media
+```
+Open [http://localhost:5173](http://localhost:5173).
