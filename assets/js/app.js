@@ -75,31 +75,73 @@
 
   /* ---------------- Header & footer (single source of truth) ---------------- */
   function renderChrome() {
+    const auth = window.NL_AUTH;
+    const user = auth ? auth.getUser() : null;
+
+    let rightNavHtml = "";
+    if (user) {
+      if (user.role === "coach") {
+        rightNavHtml = `
+          <span class="user-pill user-pill--coach" title="Signed in as Head Coach">🎓 Coach Access</span>
+          ${C.players.map((p) => `<a href="${playerUrl(p)}" ${page === "player" && params.get("id") === p.id ? 'aria-current="page"' : ""}>${esc(p.name)}</a>`).join("")}
+          <button class="btn btn--sm btn--light" id="btn-logout" aria-label="Sign out">Log Out</button>
+        `;
+      } else {
+        const myPlayer = C.players.find((x) => x.id === user.playerId) || C.players[0];
+        rightNavHtml = `
+          <span class="user-pill" title="Signed in as ${esc(user.name)}">👤 ${esc(user.name)}</span>
+          <a href="${playerUrl(myPlayer)}" ${page === "player" && params.get("id") === myPlayer.id ? 'aria-current="page"' : ""}>My Profile</a>
+          <button class="btn btn--sm btn--light" id="btn-logout" aria-label="Sign out">Log Out</button>
+        `;
+      }
+    } else {
+      rightNavHtml = `
+        <button class="btn btn--lime btn--sm" id="btn-login">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" style="width:13px;height:13px;margin-right:6px;"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+          Player Sign In
+        </button>
+      `;
+    }
+
     const headerSlot = $("#site-header");
     if (headerSlot) {
       headerSlot.outerHTML = `
       <header class="site-header" id="header">
         <div class="container site-header__inner">
           <nav class="nav" aria-label="Primary">
-            <a href="index.html#services">Coaching</a>
-            <a href="index.html#analysis">Video Analysis</a>
-            <a href="index.html#players" ${page !== "home" ? 'aria-current="page"' : ""}>Players</a>
+            <div class="nav-dropdown-item">
+              <a href="${user && user.role === 'player' ? playerUrl(C.players.find(x => x.id === user.playerId) || C.players[0]) : 'player.html?id=kegan-b'}" ${page === "player" || page === "drill" ? 'aria-current="page"' : ""}>Players</a>
+              <div class="nav-dropdown-menu">
+                ${(user && user.role === 'player' ? C.players.filter(x => x.id === user.playerId) : C.players).map((p) => `<a href="${playerUrl(p)}">${esc(p.name)}</a>`).join("")}
+              </div>
+            </div>
           </nav>
           <a class="logo" href="index.html" aria-label="Next Level home">${LOGO_MARK}<span class="logo__word">Next Level</span></a>
-          <nav class="nav nav--right" aria-label="Secondary">
-            <a href="index.html#about">About</a>
-            <a class="btn btn--dark btn--sm" href="index.html#contact" id="header-book">Book a Session</a>
+          <nav class="nav nav--right" aria-label="User Account">
+            ${rightNavHtml}
           </nav>
           <button class="menu-toggle" id="menu-toggle" aria-label="Open menu" aria-expanded="false"><span></span></button>
         </div>
       </header>
       <div class="mobile-menu" id="mobile-menu" aria-hidden="true">
-        <a href="index.html#services">Coaching</a>
-        <a href="index.html#analysis">Video Analysis</a>
-        <a href="index.html#players">Players</a>
-        <a href="index.html#about">About</a>
-        <a href="index.html#contact">Book a Session</a>
+        <a href="index.html">Home</a>
+        ${user ? `<span style="font-size:1.3rem;color:var(--lime);display:block;margin-top:14px">Signed in as ${esc(user.name)}</span>` : ""}
+        ${user && user.role === "coach" ? C.players.map((p) => `<a href="${playerUrl(p)}">${esc(p.name)}</a>`).join("") : ""}
+        ${user && user.role === "player" ? `<a href="${playerUrl(C.players.find((x) => x.id === user.playerId) || C.players[0])}">My Profile</a>` : ""}
+        ${user ? `<button class="btn btn--light" id="btn-m-logout" style="margin-top:20px">Log Out</button>` : `<button class="btn btn--lime" id="btn-m-login" style="margin-top:20px">Player Sign In</button>`}
       </div>`;
+
+      const loginBtn = $("#btn-login");
+      loginBtn && loginBtn.addEventListener("click", () => auth && auth.openLoginModal());
+
+      const logoutBtn = $("#btn-logout");
+      logoutBtn && logoutBtn.addEventListener("click", () => auth && auth.logout());
+
+      const mLoginBtn = $("#btn-m-login");
+      mLoginBtn && mLoginBtn.addEventListener("click", () => auth && auth.openLoginModal());
+
+      const mLogoutBtn = $("#btn-m-logout");
+      mLogoutBtn && mLogoutBtn.addEventListener("click", () => auth && auth.logout());
     }
 
     const footerSlot = $("#site-footer");
@@ -110,31 +152,25 @@
           <div class="footer-grid">
             <div>
               <a class="logo" href="index.html">${LOGO_MARK}<span class="logo__word">Next Level</span></a>
-              <p>Private tennis coaching and video analysis. See your game clearly — then take it to the next level.</p>
+              <p>Player training portal and video analysis archive.</p>
             </div>
             <div>
-              <h4>Services</h4>
-              <ul>
-                <li><a href="index.html#services">Private Coaching</a></li>
-                <li><a href="index.html#analysis">Video Analysis</a></li>
-                <li><a href="index.html#process">How It Works</a></li>
-              </ul>
-            </div>
-            <div>
-              <h4>Players</h4>
+              <h4>Demo Profiles</h4>
               <ul>${C.players.map((p) => `<li><a href="${playerUrl(p)}">${esc(p.name)}</a></li>`).join("")}</ul>
             </div>
             <div>
-              <h4>Studio</h4>
+              <h4>Training System</h4>
               <ul>
-                <li><a href="index.html#about">About</a></li>
-                <li><a href="index.html#contact">Book a Session</a></li>
+                <li><a href="player.html?id=kegan-b#report">Training Reports</a></li>
+                <li><a href="player.html?id=kegan-b#strokes">Stroke Diagnostics</a></li>
+                <li><a href="player.html?id=kegan-b#drills">Personal Drills</a></li>
+                <li><a href="player.html?id=kegan-b#videos">Video Catalog</a></li>
               </ul>
             </div>
           </div>
           <div class="footer-bottom">
-            <span>© ${new Date().getFullYear()} Next Level Tennis. All rights reserved.</span>
-            <span>Private Coaching · Video Analysis</span>
+            <span>© ${new Date().getFullYear()} Next Level Tennis. Student Training Portal.</span>
+            <span>Player Profiles · Video Analysis</span>
           </div>
         </div>
         <div class="footer-word" aria-hidden="true">Next Level</div>
@@ -361,8 +397,23 @@
      ====================================================================== */
   function renderPlayer() {
     const root = $("#app");
-    const p = findPlayer(params.get("id")) || (params.get("id") ? null : C.players[0]);
+    const auth = window.NL_AUTH;
+    const user = auth ? auth.getUser() : null;
+
+    // Route Protection: Prompt for sign-in if not authenticated
+    if (!auth || !auth.isAuthenticated()) {
+      return auth ? auth.renderLockScreen(root, "unauthenticated") : null;
+    }
+
+    // Default to the logged-in student's profile if no id specified, or first player for coach
+    const requestedId = params.get("id") || (user && user.playerId !== "all" ? user.playerId : C.players[0].id);
+    const p = findPlayer(requestedId);
     if (!p) return renderNotFound(root, "Player not found");
+
+    // Per-Player Access Enforcement: Students can only view their own profile; Coach can view all
+    if (!auth.canAccessPlayer(p.id)) {
+      return auth.renderLockScreen(root, "unauthorized", p);
+    }
 
     document.title = `${p.name} — Player Profile | Next Level Tennis`;
     $('meta[name="description"]').setAttribute(
@@ -375,13 +426,16 @@
       return s ? s.src : p.cover;
     };
 
+    const isCoach = user && user.role === "coach";
+    const otherPlayer = C.players.find((x) => x.id !== p.id);
+
     root.innerHTML = `
       <section class="p-hero" id="overview">
         <div class="container">
           <div class="p-hero__grid">
             <div class="p-hero__text">
               <nav class="crumbs" aria-label="Breadcrumb">
-                <a href="index.html">Home</a><span class="sep">/</span><a href="index.html#players">Players</a><span class="sep">/</span><span>${esc(p.name)}</span>
+                <a href="index.html">Home</a><span class="sep">/</span><span>Players</span><span class="sep">/</span><span>${esc(p.name)}</span>
               </nav>
               <span class="eyebrow">Player Profile · ${esc(p.report)}</span>
               <h1 class="display p-hero__name"><span class="line"><span>${esc(p.firstName)}</span></span><span class="line"><span>${esc(p.lastName)}</span></span></h1>
@@ -394,6 +448,7 @@
               <div class="p-hero__actions">
                 <a class="btn btn--lime" href="#videos" id="jump-videos">Watch Videos ${I.down}</a>
                 <a class="btn" href="#drills" id="jump-drills">View Drills ${I.arrow}</a>
+                ${isCoach && otherPlayer ? `<a class="btn btn--dark" href="${playerUrl(otherPlayer)}" id="switch-profile">Switch to ${esc(otherPlayer.name)} ${I.arrow}</a>` : ""}
               </div>
             </div>
             <div class="p-hero__portrait">
@@ -683,9 +738,22 @@
      ====================================================================== */
   function renderDrill() {
     const root = $("#app");
-    const p = findPlayer(params.get("player"));
+    const auth = window.NL_AUTH;
+    const playerId = params.get("player");
+    const p = findPlayer(playerId);
     const d = p && p.drills.find((x) => x.id === params.get("drill"));
+
+    // Route Protection: Prompt for sign-in if not authenticated
+    if (!auth || !auth.isAuthenticated()) {
+      return auth ? auth.renderLockScreen(root, "unauthenticated", p) : null;
+    }
+
     if (!p || !d) return renderNotFound(root, "Drill not found");
+
+    // Per-Player Access Enforcement: Students can only access their own drills; Coach can access all
+    if (!auth.canAccessPlayer(p.id)) {
+      return auth.renderLockScreen(root, "unauthorized", p);
+    }
 
     const i = p.drills.indexOf(d);
     const prev = p.drills[(i - 1 + p.drills.length) % p.drills.length];
@@ -699,7 +767,7 @@
       <section class="d-hero">
         <div class="container">
           <nav class="crumbs" aria-label="Breadcrumb">
-            <a href="index.html">Home</a><span class="sep">/</span><a href="index.html#players">Players</a><span class="sep">/</span>
+            <a href="index.html">Home</a><span class="sep">/</span>
             <a href="${playerUrl(p)}">${esc(p.name)}</a><span class="sep">/</span><a href="${playerUrl(p)}#drills">Drills</a>
           </nav>
           <div class="d-hero__grid">
@@ -880,4 +948,12 @@
   if (page === "drill") renderDrill();
   initHeader();
   initReveal();
+
+  window.addEventListener("nl:auth-change", () => {
+    renderChrome();
+    initHeader();
+    if (page === "player") renderPlayer();
+    if (page === "drill") renderDrill();
+    initReveal();
+  });
 })();

@@ -21,5 +21,41 @@
  */
 window.NL_CONFIG = {
   // Connected AWS S3 bucket endpoint (us-east-2)
-  mediaBaseUrl: "https://nextlevel-tennis-media-312392183301-us-east-2-an.s3.us-east-2.amazonaws.com"
+  mediaBaseUrl: "https://nextlevel-tennis-media-312392183301-us-east-2-an.s3.us-east-2.amazonaws.com",
+
+  // AWS Cognito Authentication & Security Configuration
+  auth: {
+    enabled: true,
+    region: "us-east-2",
+    // To connect your live AWS Cognito User Pool, paste your User Pool ID and App Client ID below:
+    userPoolId: "us-east-2_examplePool",
+    userPoolWebClientId: "xxxxxxxxxxxxxxxxxxxxxxxxxx", // Public App Client ID (no client secret for SPAs)
+
+    // Demo Mode allows immediate testing with preconfigured student & coach accounts
+    demoMode: true,
+    demoUsers: [
+      {
+        username: "kegan@nextlevel.com",
+        password: "Password123!",
+        name: "Kegan Barkley",
+        playerId: "kegan-b",
+        role: "player",
+      },
+      {
+        username: "madison@nextlevel.com",
+        password: "Password123!",
+        name: "Madison Staine",
+        playerId: "madison-s",
+        role: "player",
+      },
+      {
+        username: "coach@nextlevel.com",
+        password: "CoachPassword123!",
+        name: "Head Coach",
+        playerId: "all",
+        role: "coach",
+      },
+    ],
+  },
 };
+
