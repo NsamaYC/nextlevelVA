@@ -63,5 +63,37 @@ window.NL_MEDIA = {
   "students/Madison S/Videos/side-Forhand.mp4": {
     "poster": "assets/media/posters/madison-s-videos-side-forhand.jpg",
     "duration": 31
+  },
+  "students/Sayf B/drills/Backhand Analysis/Backhand.mp4": {
+    "poster": "assets/media/posters/sayf-b-drills-backhand-analysis-backhand.jpg",
+    "duration": 12
+  },
+  "students/Sayf B/drills/Backhand on the Run/backhand on the run.mp4": {
+    "poster": "assets/media/posters/sayf-b-drills-backhand-on-the-run-backhand-on-the-run.jpg",
+    "duration": 18
+  },
+  "students/Sayf B/drills/backhand return of serve/backhand return of serve.mp4": {
+    "poster": "assets/media/posters/sayf-b-drills-backhand-return-of-serve-backhand-return-of-serve.jpg",
+    "duration": 133
+  },
+  "students/Sayf B/drills/Forehand on the Run/Forehand on the Run.mp4": {
+    "poster": "assets/media/posters/sayf-b-drills-forehand-on-the-run-forehand-on-the-run.jpg",
+    "duration": 16
+  },
+  "students/Sayf B/drills/Return of Serve/Return of serve pt 2.mp4": {
+    "poster": "assets/media/posters/sayf-b-drills-return-of-serve-return-of-serve-pt-2.jpg",
+    "duration": 36
+  },
+  "students/Sayf B/drills/Return of Serve/return of serve.mp4": {
+    "poster": "assets/media/posters/sayf-b-drills-return-of-serve-return-of-serve.jpg",
+    "duration": 64
+  },
+  "students/Sayf B/drills/Serve Analysis behind L1/Serve Analysis behind L1.mp4": {
+    "poster": "assets/media/posters/sayf-b-drills-serve-analysis-behind-l1-serve-analysis-behind-l1.jpg",
+    "duration": 35
+  },
+  "students/Sayf B/drills/Standing Forehand/Standing Forehand.mp4": {
+    "poster": "assets/media/posters/sayf-b-drills-standing-forehand-standing-forehand.jpg",
+    "duration": 15
   }
 };

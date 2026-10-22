@@ -27,6 +27,13 @@
       role: "player",
     },
     {
+      username: "sayf@nextlevel.com",
+      password: "Password123!",
+      name: "Sayf Baig",
+      playerId: "sayf-b",
+      role: "player",
+    },
+    {
       username: "coach@nextlevel.com",
       password: "CoachPassword123!",
       name: "Head Coach",
@@ -162,6 +169,7 @@
     if (!playerId) {
       if (email.toLowerCase().includes("kegan")) playerId = "kegan-b";
       else if (email.toLowerCase().includes("madison")) playerId = "madison-s";
+      else if (email.toLowerCase().includes("sayf")) playerId = "sayf-b";
       else if (role === "coach") playerId = "all";
       else playerId = "kegan-b"; // default fallback
     }
@@ -209,6 +217,17 @@
           playerId: "madison-s",
           accessToken: "demo-jwt-madison-s",
           idToken: "demo-id-token-madison-s",
+          expiresAt: Date.now() + 7200 * 1000,
+        };
+      }
+      if (cleanU === "sayf" || cleanU === "sayf-b") {
+        return {
+          username: "sayf@nextlevel.com",
+          name: "Sayf Baig",
+          role: "player",
+          playerId: "sayf-b",
+          accessToken: "demo-jwt-sayf-b",
+          idToken: "demo-id-token-sayf-b",
           expiresAt: Date.now() + 7200 * 1000,
         };
       }
@@ -319,6 +338,9 @@
             </button>
             <button class="btn btn--dark btn--sm" data-demo-user="madison">
               <span>👤 Madison Staine</span>
+            </button>
+            <button class="btn btn--dark btn--sm" data-demo-user="sayf">
+              <span>👤 Sayf Baig</span>
             </button>
             <button class="btn btn--dark btn--sm" data-demo-user="coach">
               <span>🎓 Head Coach (All Access)</span>

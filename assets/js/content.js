@@ -107,6 +107,7 @@
 
   const K = "students/Kegan B";
   const M = "students/Madison S";
+  const S = "students/Sayf B";
 
   window.NL_CONTENT = {
     brand: {
@@ -801,6 +802,641 @@
                 ],
               },
             ],
+          },
+        ],
+      },
+
+      /* =====================================================================
+         SAYF B
+         ===================================================================== */
+      {
+        id: "sayf-b",
+        name: "Sayf Baig",
+        firstName: "Sayf",
+        lastName: "Baig",
+        report: "Training Report — October 2026",
+        reportShort: "Oct 2026",
+        cover: `${S}/profile/sayf-cover.png`,
+        portrait: "assets/media/sayf-portrait.jpg",
+        portraitFallback: `${S}/profile/sayf-profile.png`,
+        portraitPosition: "50% 25%",
+        slideshow: [
+          { src: `${S}/profile/slideshow/sayf-forehand.png`, caption: "Standing Forehand" },
+          { src: `${S}/profile/slideshow/sayf-forehand-run.png`, caption: "Forehand on the Run" },
+          { src: `${S}/profile/slideshow/sayf-backhand.png`, caption: "Backhand Technique" },
+          { src: `${S}/profile/slideshow/sayf-backhand-run.png`, caption: "Backhand on the Run" },
+          { src: `${S}/profile/slideshow/sayf-serve.png`, caption: "Serve Analysis" },
+          { src: `${S}/profile/slideshow/sayf-return.png`, caption: "Return of Serve" },
+        ],
+        strengths: [
+          "Quick court movement and high work rate during dynamic rallies.",
+          "Solid baseline groundstroke fundamentals with clean ball striking.",
+          "Aggressive mindset on offensive and running groundstrokes.",
+          "Receptive to technical adjustments on stroke mechanics and split-step footwork.",
+        ],
+        weaknesses: [
+          "Wrist-dominant slap on the backhand return; needs shoulder-led unit turn and extended finish.",
+          "Footwork alignment on the run: tendency to side shuffle rather than running naturally and using the mogul step.",
+          "Serve preparation: opening up hips and shoulders too early prior to upward launch into the court.",
+          "Split-step timing on the return of serve; needs forward momentum step as the server contacts the ball.",
+        ],
+        strokes: [
+          {
+            title: "Forehand",
+            points: [
+              "Rotate shoulders more during preparation for a full coil without overrotating.",
+              "Keep the elbow away from the body in a straight line, not pointing too far down or too high.",
+              "Fully extend the arm and elbow through the ball after contact point.",
+              "Finish the swing with the edge of the racket touching the back of the shoulder.",
+              "On the run: unlock hips, run naturally, bend knees, and execute the mogul step to maintain balance and recover quickly.",
+            ],
+          },
+          {
+            title: "Backhand",
+            points: [
+              "Keep both palms firmly on the racket handle, not just gripping with the fingers.",
+              "Keep the elbows slightly away from the body, with the right arm straight and the left elbow slightly bent.",
+              "Keep the edge of the racket pointing up without prematurely opening the racket face.",
+              "Extend both arms more after contact instead of cutting the swing short.",
+              "Rotate through the foot and hip during the swing, keeping both feet grounded without jumping.",
+            ],
+          },
+          {
+            title: "Serve & Return",
+            points: [
+              "Ball toss at 12:30–1:00 slightly into the court for optimal contact elevation.",
+              "Keep right foot in line when bringing feet together; do not cross behind the left foot.",
+              "Stay sideways longer during preparation; rotate forward into the court only during the explosive upward jump.",
+              "Maximize forearm pronation through contact; land balanced on the left foot.",
+              "Return of Serve: take two steps forward into a timed split step, initiate with compact shoulder turn, and extend both arms firmly.",
+            ],
+          },
+        ],
+        note: [
+          "Sayf is a dedicated, highly athletic player with excellent drive and court work rate.",
+          "By replacing wrist-dominant actions with whole-body shoulder coil, grounded hip rotation, and purposeful split-step timing, Sayf will develop exceptional shot control, depth, and match consistency.",
+          "Focusing on balance, extension, and disciplined footwork will elevate his competitive match performance.",
+        ],
+        videos: [
+          { src: `${S}/drills/Standing Forehand/Standing Forehand.mp4`, title: "Standing Forehand", tag: "Analysis" },
+          { src: `${S}/drills/Forehand on the Run/Forehand on the Run.mp4`, title: "Forehand on the Run", tag: "Dynamic" },
+          { src: `${S}/drills/Backhand Analysis/Backhand.mp4`, title: "Backhand Analysis", tag: "Technique" },
+          { src: `${S}/drills/Backhand on the Run/backhand on the run.mp4`, title: "Backhand on the Run", tag: "Footwork" },
+          { src: `${S}/drills/Serve Analysis behind L1/Serve Analysis behind L1.mp4`, title: "Serve Analysis", tag: "Behind View" },
+          { src: `${S}/drills/backhand return of serve/backhand return of serve.mp4`, title: "Backhand Return of Serve", tag: "Comprehensive" },
+          { src: `${S}/drills/Return of Serve/return of serve.mp4`, title: "Return of Serve Footwork", tag: "Split-Step" },
+        ],
+        drills: [
+          {
+            id: "standing-forehand",
+            title: "Standing Forehand Analysis",
+            category: "Forehand",
+            view: "Analysis",
+            video: `${S}/drills/Standing Forehand/Standing Forehand.mp4`,
+            overview:
+              "This video breakdown analyzes Sayf's standing forehand stroke mechanics. The analysis focuses on rotating the shoulders properly during preparation, establishing clean elbow spacing, extending through contact, and finishing over the shoulder.",
+            sections: [
+              {
+                eyebrow: "Core Technical Elements",
+                title: "Fundamentals of Sayf's Standing Forehand",
+                cards: [
+                  { label: "Shoulder Rotation", text: "Rotate shoulders more during preparation for a full coil without overrotating." },
+                  { label: "Elbow Position", text: "Keep elbow away from the body in a straight line, not pointing too down or high." },
+                  { label: "Full Extension", text: "Fully extend the arm and elbow through the ball after contact point." },
+                  { label: "Follow-Through", text: "Finish with the edge of the racket touching the back of the shoulder." },
+                ],
+                footnote: "A disciplined unit turn and extended follow-through ensure deep, penetrating topspin groundstrokes.",
+              },
+              {
+                eyebrow: "Frame by Frame",
+                title: "Technical Breakdown",
+                groupStyle: "numbered",
+                groups: [
+                  {
+                    title: "Preparation Phase",
+                    points: [
+                      "Full shoulder turn initiates as soon as incoming ball is recognized",
+                      "Elbow held comfortably away from ribs to establish swing radius",
+                      "Knees bent with balanced athletic base",
+                    ],
+                  },
+                  {
+                    title: "Swing Execution & Contact",
+                    points: [
+                      "Low-to-high swing path generates consistent topspin",
+                      "Contact point clean out in front of the front hip",
+                      "Complete extension through the impact zone",
+                    ],
+                  },
+                  {
+                    title: "Follow-Through",
+                    points: [
+                      "Racket head finishes with edge touching the back of the opposite shoulder",
+                      "Weight transfers forward through the shot into immediate recovery",
+                    ],
+                  },
+                ],
+              },
+              {
+                eyebrow: "Coach's Checklist",
+                title: "Key Technique Tips",
+                groupStyle: "numbered",
+                groups: [
+                  {
+                    title: "Preparation & Spacing",
+                    points: [
+                      "Early unit turn with both shoulders rotating together",
+                      "Maintain steady distance between elbow and torso",
+                    ],
+                  },
+                  {
+                    title: "Impact & Follow-Through",
+                    points: [
+                      "Do not decelerate or pull off the shot early",
+                      "Extend arm and elbow fully before wrapping over the shoulder",
+                    ],
+                  },
+                ],
+              },
+            ],
+            levels: {
+              beginner: {
+                title: "Form Foundations",
+                items: [
+                  "15 shadow swings emphasizing shoulder turn and finish",
+                  "Stationary drop hits focusing on elbow spacing and contact in front",
+                ],
+              },
+              advanced: {
+                title: "Rally Consistency",
+                items: [
+                  "15-ball crosscourt baseline rallies maintaining target depth",
+                  "Alternate deep crosscourt and down-the-line offensive drives",
+                ],
+              },
+            },
+          },
+          {
+            id: "forehand-on-the-run",
+            title: "Forehand on the Run",
+            category: "Footwork & Tactics",
+            view: "Dynamic",
+            video: `${S}/drills/Forehand on the Run/Forehand on the Run.mp4`,
+            overview:
+              "Hitting effectively on the run requires seamless transition from running to striking. In this analysis, Sayf works on unlocking his hips, running naturally rather than side shuffling, bending to get under the ball, and executing the mogul step.",
+            sections: [
+              {
+                eyebrow: "Dynamic Movement",
+                title: "Mastering Forehands on the Run",
+                cards: [
+                  { label: "Hip Rotation", text: "Unlock hips by turning both feet toward ball direction; run naturally, no side shuffling." },
+                  { label: "Shoulder Turn", text: "Improve left shoulder turn early while in stride to create optimal coil." },
+                  { label: "Knee Bend", text: "Bend knees deeply to get underneath the ball for control, shape, and height." },
+                  { label: "Mogul Step", text: "Execute the mogul step, pushing through outside leg to absorb speed and recover." },
+                ],
+                footnote: "The mogul step allows players to strike offensively on the run while recovering immediately back to center.",
+              },
+              {
+                eyebrow: "Frame by Frame",
+                title: "Technical Breakdown",
+                groupStyle: "numbered",
+                groups: [
+                  {
+                    title: "Sprint & Preparation",
+                    points: [
+                      "Track the ball with natural forward running strides",
+                      "Left shoulder turns early to align upper body with court line",
+                    ],
+                  },
+                  {
+                    title: "Loading & Striking",
+                    points: [
+                      "Plant and load outside foot into a dynamic open stance",
+                      "Lower hips and drive upward through the ball with topspin",
+                    ],
+                  },
+                  {
+                    title: "Mogul Step & Recovery",
+                    points: [
+                      "Push off the right leg (mogul step) to decelerate cleanly",
+                      "Immediate crossover step back toward center home base",
+                    ],
+                  },
+                ],
+              },
+              {
+                eyebrow: "Coach's Checklist",
+                title: "Coaching Cues",
+                groupStyle: "numbered",
+                groups: [
+                  {
+                    title: "Movement Rules",
+                    points: [
+                      "Never shuffle sideways when chasing wide balls — sprint with toes pointing to the target",
+                      "Get low under the bounce before swinging",
+                    ],
+                  },
+                  {
+                    title: "Recovery Discipline",
+                    points: [
+                      "Trust the mogul step to redirect your momentum back into court",
+                    ],
+                  },
+                ],
+              },
+            ],
+            levels: {
+              beginner: {
+                title: "Footwork Drill",
+                items: [
+                  "Sprint wide, stop with mogul step balance check, return without ball (10 reps)",
+                  "Coach feed to wide tramline: run, mogul step, hit deep crosscourt",
+                ],
+              },
+              advanced: {
+                title: "Match Intensity",
+                items: [
+                  "Corner-to-corner recovery drills under time pressure",
+                  "Wide running forehand down-the-line passing shot simulation",
+                ],
+              },
+            },
+          },
+          {
+            id: "backhand-analysis",
+            title: "Two-Handed Backhand Analysis",
+            category: "Backhand",
+            view: "Technique",
+            video: `${S}/drills/Backhand Analysis/Backhand.mp4`,
+            overview:
+              "This technical analysis examines Sayf's two-handed backhand mechanics. The breakdown focuses on firm palm grip placement, optimal elbow extension, closed racket face orientation, extended contact, and grounded hip rotation.",
+            sections: [
+              {
+                eyebrow: "Core Technical Elements",
+                title: "Two-Handed Backhand Fundamentals",
+                cards: [
+                  { label: "Grip Foundation", text: "Keep both palms firmly on the handle, not just gripping with the fingertips." },
+                  { label: "Elbow Spacing", text: "Right arm straight, left elbow slightly bent, held comfortably away from ribs." },
+                  { label: "Racket Orientation", text: "Keep edge of racket pointing up without opening face prematurely." },
+                  { label: "Grounded Rotation", text: "Rotate through foot and hip while staying grounded; eliminate jumping." },
+                ],
+                footnote: "Staying grounded through rotational hip drive creates heavy, penetrating backhands without sacrificing balance.",
+              },
+              {
+                eyebrow: "Frame by Frame",
+                title: "Technical Breakdown",
+                groupStyle: "numbered",
+                groups: [
+                  {
+                    title: "Preparation & Coil",
+                    points: [
+                      "Both hands connected with firm palm contact on the handle",
+                      "Full shoulder coil with racket edge pointing up",
+                      "Balanced stance with both feet planted into the court",
+                    ],
+                  },
+                  {
+                    title: "Drive & Contact",
+                    points: [
+                      "Uncoil through hips while maintaining grounded feet",
+                      "Right arm straight guiding the stroke, left arm driving the racquet head",
+                      "Extend both arms through the contact zone instead of cutting short",
+                    ],
+                  },
+                  {
+                    title: "Follow-Through & Recovery",
+                    points: [
+                      "High finish over the right shoulder with chest open to target",
+                      "Maintain balance without drifting or jumping backwards",
+                    ],
+                  },
+                ],
+              },
+              {
+                eyebrow: "Coach's Checklist",
+                title: "Key Technique Tips",
+                groupStyle: "numbered",
+                groups: [
+                  {
+                    title: "Hands & Wrists",
+                    points: [
+                      "Full palm contact provides stability against heavy pace",
+                      "Keep wrists firm; drive from the shoulders and core",
+                    ],
+                  },
+                  {
+                    title: "Body Mechanics",
+                    points: [
+                      "Stay grounded through the swing — do not jump at contact",
+                      "Extend both arms fully through the ball toward the target",
+                    ],
+                  },
+                ],
+              },
+            ],
+            levels: backhandLevels,
+          },
+          {
+            id: "backhand-on-the-run",
+            title: "Backhand on the Run",
+            category: "Footwork",
+            view: "Dynamic",
+            video: `${S}/drills/Backhand on the Run/backhand on the run.mp4`,
+            overview:
+              "Developing reliability on defensive and stretched backhands. Sayf works on tracking balls into the backhand corner, stabilizing his base, and driving with two hands through full extension.",
+            sections: [
+              {
+                eyebrow: "Dynamic Groundstrokes",
+                title: "Running Backhand Execution",
+                cards: [
+                  { label: "Early Takeback", text: "Prepare both hands and turn shoulders while in transit toward the ball." },
+                  { label: "Low Base", text: "Deep knee bend to establish strong balance point on outside foot." },
+                  { label: "Firm Extension", text: "Extend both arms through impact to lift ball with shape and depth." },
+                  { label: "Quick Recovery", text: "Immediate push-back toward court center after stroke completion." },
+                ],
+              },
+              {
+                eyebrow: "Frame by Frame",
+                title: "Technical Breakdown",
+                groupStyle: "numbered",
+                groups: [
+                  {
+                    title: "Movement Phase",
+                    points: [
+                      "Sprint with shoulders turning as soon as trajectory is clear",
+                      "Adjust strides as approaching the strike zone",
+                    ],
+                  },
+                  {
+                    title: "Impact Phase",
+                    points: [
+                      "Firm palm grip prevents racket deflection on heavy pace",
+                      "Drive through the ball with full arm extension",
+                    ],
+                  },
+                ],
+              },
+              groundstrokeTips,
+            ],
+            levels: backhandLevels,
+          },
+          {
+            id: "backhand-return-of-serve",
+            title: "Backhand Return of Serve Analysis",
+            category: "Return",
+            view: "Comprehensive",
+            video: `${S}/drills/backhand return of serve/backhand return of serve.mp4`,
+            overview:
+              "An extensive technical breakdown of Sayf's two-handed backhand return of serve. The goal is replacing wrist-dominant slapping with a compact shoulder-led return, two forward steps into a split step, and firm arm extension through the ball.",
+            sections: [
+              {
+                eyebrow: "Diagnostic Analysis",
+                title: "Current Issues vs. Required Corrections",
+                cards: [
+                  { label: "Problem: Wrist Slap", text: "Correction: Initiate stroke with shoulder rotation; eliminate wrist flicking." },
+                  { label: "Problem: Long Backswing", text: "Correction: Compact preparation (50% normal backswing) with strings forward." },
+                  { label: "Problem: Static Footwork", text: "Correction: Take two controlled steps forward timed into a split step." },
+                  { label: "Problem: Short Finish", text: "Correction: Extend both arms forward through the intended return path." },
+                ],
+                footnote: "Coaching Cue: 'Two steps forward, split, turn, and extend.'",
+              },
+              {
+                eyebrow: "Step-by-Step Sequence",
+                title: "Technical Movement Sequence",
+                groupStyle: "timeline",
+                groups: [
+                  {
+                    title: "1. Two Steps Forward & Split Step",
+                    points: [
+                      "Take two controlled forward steps into the return position as server tosses",
+                      "Time split step so both feet land balanced right as opponent contacts ball",
+                      "React instantly toward the ball with short shoulder turn",
+                    ],
+                  },
+                  {
+                    title: "2. Compact Shoulder Preparation",
+                    points: [
+                      "Turn shoulders together with both hands connected to handle",
+                      "Backswing approximately 50% shorter than baseline rally backhand",
+                      "Strings oriented forward to avoid over-rotation behind body",
+                    ],
+                  },
+                  {
+                    title: "3. Contact Point & Arm Extension",
+                    points: [
+                      "Contact ball out in front of the body with stable racket face",
+                      "Extend both arms forward through the line of the shot",
+                      "Let shoulders and arms guide the stroke rather than wrist flicking",
+                    ],
+                  },
+                  {
+                    title: "4. Natural Follow-Through",
+                    points: [
+                      "Extend through the ball before finishing smoothly",
+                      "Maintain both hands on racquet and recover immediately",
+                    ],
+                  },
+                ],
+              },
+              {
+                eyebrow: "Four Training Priorities",
+                title: "Development Roadmap",
+                groupStyle: "numbered",
+                groups: [
+                  {
+                    title: "Priority 1 — Shoulder Turn",
+                    points: ["Build muscle memory of initiating return with compact shoulder turn rather than hands/wrists."],
+                  },
+                  {
+                    title: "Priority 2 — Compact Preparation",
+                    points: ["Reduce backswing to 50% to handle high velocity first serves."],
+                  },
+                  {
+                    title: "Priority 3 — Stable Contact & Extension",
+                    points: ["Keep both arms extending through contact with firm, locked wrists."],
+                  },
+                  {
+                    title: "Priority 4 — Footwork & Forward Momentum",
+                    points: ["Master two-step forward cadence and explosive split step."],
+                  },
+                ],
+              },
+              {
+                eyebrow: "Coach's Summary",
+                title: "Key Return Reminder",
+                cards: [
+                  { label: "Step 1", text: "TWO STEPS FORWARD" },
+                  { label: "Step 2", text: "SPLIT STEP" },
+                  { label: "Step 3", text: "SHORT SHOULDER TURN" },
+                  { label: "Step 4", text: "CONTACT IN FRONT & EXTEND" },
+                ],
+              },
+            ],
+            levels: {
+              beginner: {
+                title: "Return Footwork Routine",
+                items: [
+                  "10 repetitions: Two steps forward → split step timing on coach's toss",
+                  "Short feeds: Compact shoulder turn and punch return deep down the middle",
+                ],
+              },
+              advanced: {
+                title: "Live Serve Pressure",
+                items: [
+                  "Returning live 1st serves: focus on 50% backswing and stable contact in front",
+                  "Returning 2nd serves: step forward aggressively and direct return deep crosscourt",
+                ],
+              },
+            },
+          },
+          {
+            id: "return-of-serve-footwork",
+            title: "Return of Serve — Split-Step Timing",
+            category: "Footwork",
+            view: "Drill",
+            video: `${S}/drills/Return of Serve/return of serve.mp4`,
+            overview:
+              "Timing the split step on the return of serve is crucial for explosive directional movement. Sayf practices adding one extra forward step before his split step to arrive balanced and ready to explode toward either corner.",
+            sections: [
+              {
+                eyebrow: "Footwork Rhythm",
+                title: "Split-Step Timing Mechanics",
+                cards: [
+                  { label: "Forward Step", text: "Move feet forward as opponent begins their service motion." },
+                  { label: "Airborne Timing", text: "Both feet should be in the air when opponent contacts the ball." },
+                  { label: "Balanced Landing", text: "Land balanced on the balls of both feet wide and low." },
+                  { label: "Explosive Push", text: "Drive immediately toward ball trajectory in either direction." },
+                ],
+                footnote: "Proper split timing turns reactive returning into proactive, aggressive court positioning.",
+              },
+              {
+                eyebrow: "Frame by Frame",
+                title: "Return Movement Execution",
+                groupStyle: "numbered",
+                groups: [
+                  {
+                    title: "Anticipation Phase",
+                    points: [
+                      "Watch server's toss and initiation closely",
+                      "Take deliberate steps forward into the court",
+                    ],
+                  },
+                  {
+                    title: "Split & Reaction",
+                    points: [
+                      "Jump slightly so contact coincides with apex of split",
+                      "Land ready to push off outside foot toward the ball",
+                    ],
+                  },
+                ],
+              },
+            ],
+            levels: {
+              beginner: {
+                title: "Timing Sync",
+                items: [
+                  "Synchronize split jump with coach hitting against backboard",
+                  "50 split-step repetitions landing in athletic stance",
+                ],
+              },
+              advanced: {
+                title: "Directional Explosion",
+                items: [
+                  "Live serve reception reacting to random wide or body serves",
+                  "Return and sprint forward for immediate volley follow-up",
+                ],
+              },
+            },
+          },
+          {
+            id: "serve-analysis-behind-l1",
+            title: "Serve Analysis (Behind L1)",
+            category: "Serve",
+            view: "Behind View",
+            video: `${S}/drills/Serve Analysis behind L1/Serve Analysis behind L1.mp4`,
+            overview:
+              "A behind-the-baseline video breakdown of Sayf's serve mechanics. The analysis addresses toss positioning (12:30–1 o'clock), foot alignment, staying sideways during trophy preparation, explosive vertical leg drive, pronation, and balanced left-foot landing.",
+            sections: [
+              {
+                eyebrow: "Core Technical Elements",
+                title: "Key Serve Mechanics",
+                cards: [
+                  { label: "Ball Toss", text: "Toss slightly more to the right and into the court (12:30–1:00 for right-handed flat serve)." },
+                  { label: "Footwork Platform", text: "Keep right foot in a straight line when bringing feet together; do not cross behind left." },
+                  { label: "Coil Discipline", text: "Stay sideways longer during prep; rotate forward as you jump up, not before." },
+                  { label: "Pronation & Landing", text: "Forearm pronation through contact; land on left foot with right leg kicking back for balance." },
+                ],
+                footnote: "Exploding vertically into the court while maintaining delayed rotation maximizes serve power and angle.",
+              },
+              {
+                eyebrow: "Frame by Frame",
+                title: "Technical Breakdown",
+                groupStyle: "numbered",
+                groups: [
+                  {
+                    title: "Platform Setup & Toss",
+                    points: [
+                      "Feet aligned comfortably; right foot stays aligned without crossing behind",
+                      "Consistent toss release into the court at 12:30 to 1 o'clock",
+                      "Deep knee bend loading power into the legs",
+                    ],
+                  },
+                  {
+                    title: "Trophy Position & Launch",
+                    points: [
+                      "Shoulders remain sideways to the net through the trophy drop",
+                      "Explosive leg drive pushes body up and forward into the court",
+                      "Upper body uncoils during the jump, not before",
+                    ],
+                  },
+                  {
+                    title: "Impact, Pronation & Landing",
+                    points: [
+                      "High contact at full extension with forearm pronation",
+                      "Clean landing on the left foot inside the baseline",
+                      "Right leg hooks behind to stabilize landing and prepare for recovery",
+                    ],
+                  },
+                ],
+              },
+              {
+                eyebrow: "Coach's Checklist",
+                title: "Serve Checklist",
+                groupStyle: "numbered",
+                groups: [
+                  {
+                    title: "Toss & Alignment",
+                    points: [
+                      "Toss into the court to pull your momentum forward",
+                      "Do not hook the right foot behind the left during platform slide",
+                    ],
+                  },
+                  {
+                    title: "Power & Rotation",
+                    points: [
+                      "Hold the coil — do not open the chest early",
+                      "Pronate aggressively through the ball",
+                    ],
+                  },
+                ],
+              },
+            ],
+            levels: {
+              beginner: {
+                title: "Toss & Platform Drills",
+                items: [
+                  "20 toss placement tests letting ball bounce in court at 12:30",
+                  "Shadow serves emphasizing straight footwork and trophy coil",
+                ],
+              },
+              advanced: {
+                title: "Target & Power Execution",
+                items: [
+                  "10 flat serves targeting the 'T' with full leg explosion",
+                  "10 slice / kick serves targeting the wide corner with balanced landing",
+                ],
+              },
+            },
           },
         ],
       },

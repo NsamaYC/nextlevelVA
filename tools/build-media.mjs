@@ -91,6 +91,7 @@ if (heroClips.length && !existsSync(heroOut)) {
 // ---- Web-sized images for oversized originals ----
 const bigImages = [
   ["students/Madison S/Profile/madison-profile.png", "madison-portrait.jpg", 1000],
+  ["students/Sayf B/profile/sayf-profile.png", "sayf-portrait.jpg", 1000],
 ];
 for (const [src, name, w] of bigImages) {
   const out = join(OUT, name);

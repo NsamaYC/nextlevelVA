@@ -17,8 +17,8 @@
   const enc = (p) => {
     if (!p) return "";
     if (p.startsWith("http://") || p.startsWith("https://") || p.startsWith("//")) return p;
-    // Always serve hero loop and hero poster directly from repository
-    if (p.startsWith("assets/media/hero-loop") || p.startsWith("assets/media/hero-poster")) {
+    // Always serve lightweight repository assets (posters, portraits, hero loop) directly from site
+    if (p.startsWith("assets/")) {
       return p.replace(/^\/+/, "").split("/").map(encodeURIComponent).join("/");
     }
     const encoded = p.replace(/^\/+/, "").split("/").map(encodeURIComponent).join("/");
