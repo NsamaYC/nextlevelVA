@@ -110,9 +110,12 @@
         <div class="container site-header__inner">
           <nav class="nav" aria-label="Primary">
             <div class="nav-dropdown-item">
-              <a href="${user && user.role === 'player' ? playerUrl(C.players.find(x => x.id === user.playerId) || C.players[0]) : 'player.html?id=kegan-b'}" ${page === "player" || page === "drill" ? 'aria-current="page"' : ""}>Players</a>
+              <a href="index.html#players" ${page === "player" || page === "drill" ? 'aria-current="page"' : ""}>
+                Players <span class="nav-count">${C.players.length}</span>
+                <svg class="nav-chevron" viewBox="0 0 24 24" width="11" height="11" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg>
+              </a>
               <div class="nav-dropdown-menu">
-                ${C.players.map((p) => `<a href="${playerUrl(p)}">${esc(p.name)}</a>`).join("")}
+                ${C.players.map((p) => `<a href="${playerUrl(p)}" ${page === "player" && params.get("id") === p.id ? 'class="is-current"' : ""}>👤 ${esc(p.name)}</a>`).join("")}
               </div>
             </div>
           </nav>
@@ -400,9 +403,10 @@
     const auth = window.NL_AUTH;
     const user = auth ? auth.getUser() : null;
 
-    // Route Protection: Prompt for sign-in if not authenticated
-    if (!auth || !auth.isAuthenticated()) {
-      return auth ? auth.renderLockScreen(root, "unauthenticated") : null;
+    // Route Protection: Prompt for sign-in only if auth is explicitly enforced and not demo mode
+    const authConfig = (window.NL_CONFIG && window.NL_CONFIG.auth) || {};
+    if (auth && authConfig.demoMode === false && !auth.isAuthenticated()) {
+      return auth.renderLockScreen(root, "unauthenticated");
     }
 
     // Default to the logged-in student's profile if no id specified, or first player for coach
@@ -426,12 +430,27 @@
       return s ? s.src : p.cover;
     };
 
-    const isCoach = user && user.role === "coach";
-    const otherPlayer = C.players.find((x) => x.id !== p.id);
+    const otherPlayers = C.players.filter((x) => x.id !== p.id);
 
     root.innerHTML = `
       <section class="p-hero" id="overview">
         <div class="container">
+          <div class="player-roster-bar" aria-label="Student profile switcher">
+            <span class="player-roster-bar__label">Student Roster:</span>
+            <div class="player-roster-bar__pills">
+              ${C.players
+                .map(
+                  (pl) => `
+                <a href="${playerUrl(pl)}" class="roster-pill ${pl.id === p.id ? "roster-pill--active" : ""}">
+                  <span class="roster-pill__dot"></span>
+                  <span class="roster-pill__name">${esc(pl.name)}</span>
+                  <span class="roster-pill__badge">${pl.drills.length} Drills</span>
+                </a>`
+                )
+                .join("")}
+            </div>
+          </div>
+
           <div class="p-hero__grid">
             <div class="p-hero__text">
               <nav class="crumbs" aria-label="Breadcrumb">
@@ -448,7 +467,12 @@
               <div class="p-hero__actions">
                 <a class="btn btn--lime" href="#videos" id="jump-videos">Watch Videos ${I.down}</a>
                 <a class="btn" href="#drills" id="jump-drills">View Drills ${I.arrow}</a>
-                ${isCoach && otherPlayer ? `<a class="btn btn--dark" href="${playerUrl(otherPlayer)}" id="switch-profile">Switch to ${esc(otherPlayer.name)} ${I.arrow}</a>` : ""}
+                ${otherPlayers
+                  .map(
+                    (other) =>
+                      `<a class="btn btn--dark" href="${playerUrl(other)}" id="switch-${other.id}">Switch to ${esc(other.name)} ${I.arrow}</a>`
+                  )
+                  .join("")}
               </div>
             </div>
             <div class="p-hero__portrait">
@@ -743,8 +767,9 @@
     const p = findPlayer(playerId);
     const d = p && p.drills.find((x) => x.id === params.get("drill"));
 
-    // Route Protection: Prompt for sign-in if not authenticated
-    if (!auth || !auth.isAuthenticated()) {
+    // Route Protection: Prompt for sign-in only if auth is explicitly enforced and not demo mode
+    const authConfig = (window.NL_CONFIG && window.NL_CONFIG.auth) || {};
+    if (auth && authConfig.demoMode === false && !auth.isAuthenticated()) {
       return auth ? auth.renderLockScreen(root, "unauthenticated", p) : null;
     }
 

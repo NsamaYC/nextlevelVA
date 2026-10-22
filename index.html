@@ -3,6 +3,9 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+  <meta http-equiv="Pragma" content="no-cache">
+  <meta http-equiv="Expires" content="0">
   <title>Next Level — Student Profiles &amp; Video Analysis</title>
   <meta name="description" content="Next Level tennis player portal: high-speed video analysis, personal drill libraries, and frame-by-frame stroke breakdowns for active players.">
   
@@ -11,7 +14,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
   
-  <link rel="stylesheet" href="assets/css/styles.css">
+  <link rel="stylesheet" href="assets/css/styles.css?v=20261022-3p">
 </head>
 <body data-page="home">
 
@@ -38,8 +41,13 @@
         </div>
         
         <div class="hero__bottom">
-          <span class="display">ELEVATE YOUR GAME</span>
-          <span class="hero__meta">Private Coaching · High-Speed Video Analysis · Custom Drills</span>
+          <div>
+            <span class="display">ELEVATE YOUR GAME</span>
+            <span class="hero__meta">Private Coaching · High-Speed Video Analysis · Custom Drills</span>
+          </div>
+          <div style="margin-top:12px">
+            <a class="btn btn--lime" href="#players">View Student Roster (3) ↓</a>
+          </div>
         </div>
       </div>
     </div>
@@ -66,11 +74,11 @@
   <!-- Footer slot (populated by app.js) -->
   <div id="site-footer"></div>
 
-  <!-- Scripts -->
-  <script src="assets/js/config.js"></script>
-  <script src="assets/js/auth.js"></script>
-  <script src="assets/js/media-manifest.js"></script>
-  <script src="assets/js/content.js"></script>
-  <script src="assets/js/app.js"></script>
+  <!-- Scripts with cache busting query string -->
+  <script src="assets/js/config.js?v=20261022-3p"></script>
+  <script src="assets/js/auth.js?v=20261022-3p"></script>
+  <script src="assets/js/media-manifest.js?v=20261022-3p"></script>
+  <script src="assets/js/content.js?v=20261022-3p"></script>
+  <script src="assets/js/app.js?v=20261022-3p"></script>
 </body>
 </html>

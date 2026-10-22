@@ -103,10 +103,11 @@
 
   /**
    * Evaluates if current authenticated user has access to a specific player ID.
-   * - Coaches have access to all players ("all").
-   * - Students only have access to their own player ID.
+   * - In demo mode (CONFIG.demoMode !== false), all demo player profiles are viewable.
+   * - In strict mode, coaches have access to all players ("all"), students to their own.
    */
   function canAccessPlayer(playerId) {
+    if (CONFIG.demoMode !== false) return true;
     const u = getUser();
     if (!u) return false;
     if (u.role === "coach") return true;
