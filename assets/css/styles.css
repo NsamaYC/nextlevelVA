@@ -336,18 +336,9 @@ ul, ol { padding: 0; list-style: none; }
 }
 
 /* ---------- Hero (home) ---------- */
-body[data-page="home"] {
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-}
 body[data-page="home"] .hero {
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  padding-top: calc(var(--header-h) + clamp(6px, 1.5vh, 18px));
-  padding-bottom: clamp(16px, 3vh, 32px);
+  padding-top: calc(var(--header-h) + clamp(16px, 3vh, 36px));
+  padding-bottom: clamp(24px, 4vh, 48px);
   --hero-fs: clamp(3.8rem, 10.5vw, 9.5rem);
 }
 body[data-page="home"] .hero__media {
@@ -518,7 +509,7 @@ body[data-page="home"] .hero__media {
 @media (max-width: 520px) { .process { grid-template-columns: 1fr; } .process__step { border-right: 0; padding-left: 0 !important; } }
 
 /* ---------- Player cards (home preview) ---------- */
-.players-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: clamp(28px, 5vw, 72px); }
+.players-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: clamp(28px, 4vw, 48px); }
 .player-card { display: grid; gap: 22px; }
 .player-card__media {
   position: relative; display: block;

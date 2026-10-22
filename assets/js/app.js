@@ -112,7 +112,7 @@
             <div class="nav-dropdown-item">
               <a href="${user && user.role === 'player' ? playerUrl(C.players.find(x => x.id === user.playerId) || C.players[0]) : 'player.html?id=kegan-b'}" ${page === "player" || page === "drill" ? 'aria-current="page"' : ""}>Players</a>
               <div class="nav-dropdown-menu">
-                ${(user && user.role === 'player' ? C.players.filter(x => x.id === user.playerId) : C.players).map((p) => `<a href="${playerUrl(p)}">${esc(p.name)}</a>`).join("")}
+                ${C.players.map((p) => `<a href="${playerUrl(p)}">${esc(p.name)}</a>`).join("")}
               </div>
             </div>
           </nav>
@@ -125,10 +125,10 @@
       </header>
       <div class="mobile-menu" id="mobile-menu" aria-hidden="true">
         <a href="index.html">Home</a>
-        ${user ? `<span style="font-size:1.3rem;color:var(--lime);display:block;margin-top:14px">Signed in as ${esc(user.name)}</span>` : ""}
-        ${user && user.role === "coach" ? C.players.map((p) => `<a href="${playerUrl(p)}">${esc(p.name)}</a>`).join("") : ""}
-        ${user && user.role === "player" ? `<a href="${playerUrl(C.players.find((x) => x.id === user.playerId) || C.players[0])}">My Profile</a>` : ""}
-        ${user ? `<button class="btn btn--light" id="btn-m-logout" style="margin-top:20px">Log Out</button>` : `<button class="btn btn--lime" id="btn-m-login" style="margin-top:20px">Player Sign In</button>`}
+        <span style="font-size:0.8rem;text-transform:uppercase;letter-spacing:0.12em;color:var(--lime);display:block;margin-top:16px;margin-bottom:6px">Player Profiles</span>
+        ${C.players.map((p) => `<a href="${playerUrl(p)}">${esc(p.name)}</a>`).join("")}
+        ${user ? `<span style="font-size:1.1rem;color:var(--muted);display:block;margin-top:18px">Signed in as ${esc(user.name)}</span>` : ""}
+        ${user ? `<button class="btn btn--light" id="btn-m-logout" style="margin-top:14px">Log Out</button>` : `<button class="btn btn--lime" id="btn-m-login" style="margin-top:20px">Player Sign In</button>`}
       </div>`;
 
       const loginBtn = $("#btn-login");
