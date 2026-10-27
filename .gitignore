@@ -16,3 +16,4 @@ students/**/*.mp4
 
 # Temporary logs
 *.log
+.playwright-mcp/

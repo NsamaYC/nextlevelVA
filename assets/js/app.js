@@ -60,15 +60,6 @@
     toss: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="6" r="3"/><path d="M12 12v9M8 16l4-4 4 4"/></svg>',
     recover: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12a9 9 0 0 1-15.5 6.2M3 12A9 9 0 0 1 18.5 5.8"/><path d="M21 4v5h-5M3 20v-5h5"/></svg>',
   };
-  const cardIcon = (label) => {
-    const l = label.toLowerCase();
-    if (l.includes("stance") || l.includes("balance")) return I.balance;
-    if (l.includes("prep")) return I.rotate;
-    if (l.includes("swing")) return I.path;
-    if (l.includes("toss")) return I.toss;
-    if (l.includes("recover")) return I.recover;
-    return I.finish;
-  };
 
   const LOGO_MARK =
     '<svg class="logo__mark" viewBox="0 0 32 32" aria-hidden="true"><circle cx="16" cy="16" r="14.5" fill="#d9f24a" stroke="#0e110f" stroke-width="1.6"/><path d="M6.5 5.5C13 11 13 21 6.5 26.5M25.5 5.5C19 11 19 21 25.5 26.5" fill="none" stroke="#0e110f" stroke-width="1.6" stroke-linecap="round"/></svg>';
@@ -888,7 +879,7 @@
     if (b.intro) body += `<div class="block__intro">${[].concat(b.intro).map((t) => `<p>${esc(t)}</p>`).join("")}</div>`;
     if (b.cards)
       body += `<div class="el-cards">${b.cards
-        .map((c, n) => `<div class="el-card reveal" data-delay="${n % 4}"><span class="el-card__icon">${cardIcon(c.label)}</span><h3>${esc(c.label)}</h3><p>${esc(c.text)}</p></div>`)
+        .map((c, n) => `<div class="el-card reveal" data-delay="${n % 4}"><span class="el-card__tag">Technical Cue</span><h3>${esc(c.label)}</h3><p>${esc(c.text)}</p></div>`)
         .join("")}</div>`;
     if (b.groups) {
       if (b.groupStyle === "timeline") {
@@ -906,7 +897,7 @@
       body +=
         b.listStyle === "numbered"
           ? `<ol class="ordered-list">${b.list.map((x) => `<li class="reveal"><span>${fmtPoint(x)}</span></li>`).join("")}</ol>`
-          : `<ul class="check-list">${b.list.map((x) => `<li class="reveal"><span class="ic">${I.check}</span><p>${fmtPoint(x)}</p></li>`).join("")}</ul>`;
+          : `<ul class="cue-list">${b.list.map((x) => `<li class="reveal"><div class="cue-bullet" aria-hidden="true"></div><p>${fmtPoint(x)}</p></li>`).join("")}</ul>`;
     }
     if (b.footnote) body += `<p class="block__footnote">${esc(b.footnote)}</p>`;
     if (b.figures)
