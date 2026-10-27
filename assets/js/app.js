@@ -331,9 +331,9 @@
             <span class="player-card__go">${I.arrow}</span>
           </a>
           <div class="player-card__body">
-            <span class="eyebrow">Training Report · ${esc(p.reportShort)}</span>
+            <span class="eyebrow">${p.reportShort ? `Training Report · ${esc(p.reportShort)}` : "Player Profile"}</span>
             <h3 class="display player-card__name">${esc(p.name)}</h3>
-            <p>${esc(p.note[0])}</p>
+            <p>${esc(p.note && p.note.length ? p.note[0] : `${p.drills.length} video drills and technique breakdowns.`)}</p>
             <a class="btn" href="${playerUrl(p)}" id="view-${p.id}">View Profile ${I.arrow}</a>
           </div>
         </article>`
@@ -420,13 +420,17 @@
     }
 
     document.title = `${p.name} — Player Profile | Next Level Tennis`;
+    const descParts = [];
+    if (p.strengths?.length || p.strokes?.length) descParts.push("training report", "stroke analysis");
+    if (p.drills?.length) descParts.push(`${p.drills.length} personal drills`);
+    if (p.videos?.length) descParts.push("video catalog");
     $('meta[name="description"]').setAttribute(
       "content",
-      `${p.name}'s Next Level player profile: training report, stroke analysis, ${p.drills.length} personal drills and a video catalog.`
+      `${p.name}'s Next Level player profile: ${descParts.join(", ")}.`
     );
 
     const strokeImage = (title) => {
-      const s = p.slideshow.find((x) => x.caption.toLowerCase().includes(title.toLowerCase()));
+      const s = p.slideshow && p.slideshow.find((x) => x.caption.toLowerCase().includes(title.toLowerCase()));
       return s ? s.src : p.cover;
     };
 
@@ -456,13 +460,13 @@
               <nav class="crumbs" aria-label="Breadcrumb">
                 <a href="index.html">Home</a><span class="sep">/</span><span>Players</span><span class="sep">/</span><span>${esc(p.name)}</span>
               </nav>
-              <span class="eyebrow">Player Profile · ${esc(p.report)}</span>
+              <span class="eyebrow">Player Profile${p.report ? ` · ${esc(p.report)}` : ""}</span>
               <h1 class="display p-hero__name"><span class="line"><span>${esc(p.firstName)}</span></span><span class="line"><span>${esc(p.lastName)}</span></span></h1>
               <div class="stats">
                 <div><div class="stat__num">${pad(p.drills.length)}</div><div class="stat__label">Drills</div></div>
                 <div><div class="stat__num">${pad(p.videos.length)}</div><div class="stat__label">Videos</div></div>
-                <div><div class="stat__num">${pad(p.strengths.length)}</div><div class="stat__label">Strengths</div></div>
-                <div><div class="stat__num">${pad(p.strokes.length)}</div><div class="stat__label">Strokes Analyzed</div></div>
+                ${p.strengths && p.strengths.length ? `<div><div class="stat__num">${pad(p.strengths.length)}</div><div class="stat__label">Strengths</div></div>` : ""}
+                ${p.strokes && p.strokes.length ? `<div><div class="stat__num">${pad(p.strokes.length)}</div><div class="stat__label">Strokes Analyzed</div></div>` : ""}
               </div>
               <div class="p-hero__actions">
                 <a class="btn btn--lime" href="#videos" id="jump-videos">Watch Videos ${I.down}</a>
@@ -479,7 +483,7 @@
               <div class="frame"><img src="${enc(p.portrait)}" alt="Portrait of ${esc(p.name)}" style="object-position:${p.portraitPosition || "center"}" ${p.portraitFallback ? `onerror="this.onerror=null;this.src='${enc(p.portraitFallback)}'"` : ""}></div>
               <div class="badge-spin" aria-hidden="true">
                 <svg class="ring" viewBox="0 0 120 120"><defs><path id="circ" d="M60,60 m-48,0 a48,48 0 1,1 96,0 a48,48 0 1,1 -96,0"/></defs>
-                  <text font-family="Inter, sans-serif" font-size="10.5" font-weight="600" letter-spacing="3.2" fill="#0e110f"><textPath href="#circ">NEXT LEVEL • PLAYER PROFILE • ${p.reportShort.toUpperCase()} •</textPath></text></svg>
+                  <text font-family="Inter, sans-serif" font-size="10.5" font-weight="600" letter-spacing="3.2" fill="#0e110f"><textPath href="#circ">NEXT LEVEL • PLAYER PROFILE • ${(p.reportShort || "VIDEO ANALYSIS").toUpperCase()} •</textPath></text></svg>
                 <div class="core">${LOGO_MARK.replace('class="logo__mark"', "")}</div>
               </div>
             </div>
@@ -491,11 +495,11 @@
         <div class="container subnav__inner">
           <span class="subnav__name">${esc(p.name)}</span>
           <div class="subnav__links">
-            <a href="#gallery">Gallery</a>
-            <a href="#report">Training Report</a>
-            <a href="#strokes">Stroke Analysis</a>
-            <a href="#drills">Drills</a>
-            <a href="#videos">Videos</a>
+            ${p.slideshow && p.slideshow.length ? `<a href="#gallery">Gallery</a>` : ""}
+            ${(p.strengths?.length || p.weaknesses?.length) ? `<a href="#report">Training Report</a>` : ""}
+            ${p.strokes?.length ? `<a href="#strokes">Stroke Analysis</a>` : ""}
+            ${p.drills && p.drills.length ? `<a href="#drills">Drills</a>` : ""}
+            ${p.videos && p.videos.length ? `<a href="#videos">Videos</a>` : ""}
           </div>
         </div>
       </nav>
@@ -530,24 +534,29 @@
         </div>
       </section>
 
+      ${(p.strengths?.length || p.weaknesses?.length || p.strokes?.length) ? `
       <section class="section" id="report">
         <div class="container">
+          ${(p.strengths?.length || p.weaknesses?.length) ? `
           <div class="report-head reveal">
-            <div><span class="eyebrow">${esc(p.report)}</span><h2 class="display h-xl" style="margin-top:16px">Training Report</h2></div>
+            <div><span class="eyebrow">${esc(p.report || "Training Report")}</span><h2 class="display h-xl" style="margin-top:16px">Training Report</h2></div>
             <span class="chip chip--dark">Coach Assessment</span>
           </div>
           <div class="sw-grid">
+            ${p.strengths && p.strengths.length ? `
             <article class="sw-card sw-card--s reveal">
               <div class="sw-card__head"><h3 class="display">Strengths</h3><span class="sw-card__count">${pad(p.strengths.length)}</span></div>
               <ul class="sw-list">${p.strengths.map((s) => `<li><span class="ic">${I.check}</span><p>${esc(s)}</p></li>`).join("")}</ul>
               <span class="sw-card__ghost" aria-hidden="true">+</span>
-            </article>
+            </article>` : ""}
+            ${p.weaknesses && p.weaknesses.length ? `
             <article class="sw-card sw-card--w reveal" data-delay="2">
               <div class="sw-card__head"><h3 class="display">Weaknesses</h3><span class="sw-card__count">${pad(p.weaknesses.length)}</span></div>
               <ul class="sw-list">${p.weaknesses.map((s) => `<li><span class="ic">${I.target}</span><p>${esc(s)}</p></li>`).join("")}</ul>
-            </article>
-          </div>
+            </article>` : ""}
+          </div>` : ""}
 
+          ${p.strokes && p.strokes.length ? `
           <div class="strokes" id="strokes">
             <div class="section-head reveal" style="margin-bottom:28px"><span class="eyebrow">Stroke Analysis</span><h2 class="display h-lg">Stroke by Stroke</h2></div>
             <div class="tabs reveal" role="tablist" aria-label="Strokes">
@@ -565,10 +574,11 @@
               </div>`
               )
               .join("")}
-          </div>
+          </div>` : ""}
         </div>
-      </section>
+      </section>` : ""}
 
+      ${p.note && p.note.length ? `
       <section class="section section--dark note">
         <div class="container">
           <span class="eyebrow">Coach's Note</span>
@@ -576,13 +586,13 @@
           <div class="note__text">${p.note.map((n, i) => `<p class="reveal" data-delay="${i}">${esc(n)}</p>`).join("")}</div>
           <div class="note__sig">Next Level Coaching Staff</div>
         </div>
-      </section>
+      </section>` : ""}
 
       <section class="section" id="drills">
         <div class="container">
           <div class="section-head section-head--split reveal">
             <div><span class="eyebrow">Personal Drill Library</span><h2 class="display h-xl" style="margin-top:16px">${esc(p.firstName)}'s Drills</h2></div>
-            <p class="lead">Every drill targets something from the training report. Each one has its own video breakdown and coaching notes.</p>
+            <p class="lead">${p.strengths?.length ? "Every drill targets something from the training report. Each one has its own video breakdown and coaching notes." : "Individual video breakdown sessions and technical coaching notes."}</p>
           </div>
           <div class="drills-grid">${p.drills.map((d, i) => drillCard(p, d, i)).join("")}</div>
         </div>
@@ -719,6 +729,7 @@
 
   function initTabs() {
     const tabs = $$('[role="tab"]');
+    if (!tabs.length) return;
     const select = (i) => {
       tabs.forEach((t, k) => {
         const on = k === i;
