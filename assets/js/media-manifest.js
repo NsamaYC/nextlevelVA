@@ -64,6 +64,38 @@ window.NL_MEDIA = {
     "poster": "assets/media/posters/madison-s-videos-side-forhand.jpg",
     "duration": 31
   },
+  "students/Max/Videos/Backhand on the run (1).mp4": {
+    "poster": "assets/media/posters/max-videos-backhand-on-the-run-1.jpg",
+    "duration": 13
+  },
+  "students/Max/Videos/Backhand on the run (1).mov": {
+    "poster": "assets/media/posters/max-videos-backhand-on-the-run-1.jpg",
+    "duration": 13
+  },
+  "students/Max/Videos/backhand side view.mp4": {
+    "poster": "assets/media/posters/max-videos-backhand-side-view.jpg",
+    "duration": 11
+  },
+  "students/Max/Videos/backhand side view.mov": {
+    "poster": "assets/media/posters/max-videos-backhand-side-view.jpg",
+    "duration": 11
+  },
+  "students/Max/Videos/forehand front view.mp4": {
+    "poster": "assets/media/posters/max-videos-forehand-front-view.jpg",
+    "duration": 12
+  },
+  "students/Max/Videos/forehand front view.mov": {
+    "poster": "assets/media/posters/max-videos-forehand-front-view.jpg",
+    "duration": 12
+  },
+  "students/Max/Videos/forehand on the run side view.mp4": {
+    "poster": "assets/media/posters/max-videos-forehand-on-the-run-side-view.jpg",
+    "duration": 12
+  },
+  "students/Max/Videos/forehand on the run side view.mov": {
+    "poster": "assets/media/posters/max-videos-forehand-on-the-run-side-view.jpg",
+    "duration": 12
+  },
   "students/Sayf B/drills/Backhand Analysis/Backhand.mp4": {
     "poster": "assets/media/posters/sayf-b-drills-backhand-analysis-backhand.jpg",
     "duration": 12
@@ -95,5 +127,37 @@ window.NL_MEDIA = {
   "students/Sayf B/drills/Standing Forehand/Standing Forehand.mp4": {
     "poster": "assets/media/posters/sayf-b-drills-standing-forehand-standing-forehand.jpg",
     "duration": 15
+  },
+  "students/Sebastian/Videos/backhand (1).mp4": {
+    "poster": "assets/media/posters/sebastian-videos-backhand-1.jpg",
+    "duration": 9
+  },
+  "students/Sebastian/Videos/backhand (1).mov": {
+    "poster": "assets/media/posters/sebastian-videos-backhand-1.jpg",
+    "duration": 9
+  },
+  "students/Sebastian/Videos/backhand on the run.mp4": {
+    "poster": "assets/media/posters/sebastian-videos-backhand-on-the-run.jpg",
+    "duration": 13
+  },
+  "students/Sebastian/Videos/backhand on the run.mov": {
+    "poster": "assets/media/posters/sebastian-videos-backhand-on-the-run.jpg",
+    "duration": 13
+  },
+  "students/Sebastian/Videos/forehand Frontview.mp4": {
+    "poster": "assets/media/posters/sebastian-videos-forehand-frontview.jpg",
+    "duration": 14
+  },
+  "students/Sebastian/Videos/forehand Frontview.mov": {
+    "poster": "assets/media/posters/sebastian-videos-forehand-frontview.jpg",
+    "duration": 14
+  },
+  "students/Sebastian/Videos/forehand on the run.mp4": {
+    "poster": "assets/media/posters/sebastian-videos-forehand-on-the-run.jpg",
+    "duration": 16
+  },
+  "students/Sebastian/Videos/forehand on the run.mov": {
+    "poster": "assets/media/posters/sebastian-videos-forehand-on-the-run.jpg",
+    "duration": 16
   }
 };

@@ -10,6 +10,7 @@ desktop.ini
 
 # Large student video files offloaded to AWS S3 (20MB - 214MB)
 students/**/*.mp4
+students/**/*.mov
 
 # Retain lightweight hero loop (828 KB) directly in repository
 !assets/media/hero-loop.mp4

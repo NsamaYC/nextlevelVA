@@ -13,12 +13,16 @@
   /* ---------------- Utilities ---------------- */
   const $ = (s, el = document) => el.querySelector(s);
   const $$ = (s, el = document) => [...el.querySelectorAll(s)];
-  const mediaBase = () => (window.NL_CONFIG && window.NL_CONFIG.mediaBaseUrl ? window.NL_CONFIG.mediaBaseUrl.replace(/\/+$/, "") : "");
+  const isLocalHost = ["localhost", "127.0.0.1", ""].includes(location.hostname);
+  const mediaBase = () => {
+    if (isLocalHost) return "";
+    return window.NL_CONFIG && window.NL_CONFIG.mediaBaseUrl ? window.NL_CONFIG.mediaBaseUrl.replace(/\/+$/, "") : "";
+  };
   const enc = (p) => {
     if (!p) return "";
     if (p.startsWith("http://") || p.startsWith("https://") || p.startsWith("//")) return p;
-    // Always serve lightweight repository assets (posters, portraits, hero loop) directly from site
-    if (p.startsWith("assets/")) {
+    // Always serve lightweight repository assets (posters, portraits, hero loop, and committed profile images) directly from site
+    if (p.startsWith("assets/") || /\.(png|jpe?g|webp|svg)$/i.test(p)) {
       return p.replace(/^\/+/, "").split("/").map(encodeURIComponent).join("/");
     }
     const encoded = p.replace(/^\/+/, "").split("/").map(encodeURIComponent).join("/");
@@ -255,6 +259,14 @@
       idx = (i + list.length) % list.length;
       const v = list[idx];
       video.poster = posterOf(v.src);
+      delete video.dataset.triedMov;
+      video.onerror = () => {
+        if (v.src.endsWith(".mp4") && !video.dataset.triedMov) {
+          video.dataset.triedMov = "1";
+          video.src = enc(v.src.replace(/\.mp4$/i, ".mov"));
+          video.play().catch(() => {});
+        }
+      };
       video.src = enc(v.src);
       $("#lightbox-title", el).textContent = v.title;
       $("#lightbox-sub", el).textContent = [v.tag, v.sub, `${idx + 1} / ${list.length}`].filter(Boolean).join("  ·  ");
@@ -821,6 +833,7 @@
         <div class="player-video" id="drill-player">
           <video id="drill-video" controls playsinline preload="none" ${posterOf(d.video) ? `poster="${posterOf(d.video)}"` : ""}>
             <source src="${enc(d.video)}" type="video/mp4">
+            ${d.video.endsWith(".mp4") ? `<source src="${enc(d.video.replace(/\.mp4$/i, ".mov"))}" type="video/quicktime">` : ""}
           </video>
           <button class="player-video__poster" id="drill-play" aria-label="Play drill video">
             ${posterOf(d.video) ? `<img src="${posterOf(d.video)}" alt="">` : ""}

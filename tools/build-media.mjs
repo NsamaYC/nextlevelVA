@@ -57,6 +57,11 @@ for (const file of videos) {
     ff(["-ss", String(at), "-i", file, "-frames:v", "1", "-vf", "scale='min(1280,iw)':-2", "-q:v", "4", posterAbs]);
   }
   manifest[web] = { poster: toWeb(posterAbs), duration };
+  // Also map matching .mov path if original .mov exists alongside .mp4
+  const movWeb = web.replace(/\.mp4$/i, ".mov");
+  if (existsSync(join(ROOT, movWeb))) {
+    manifest[movWeb] = { poster: toWeb(posterAbs), duration };
+  }
   console.log(`✓ ${web}  (${duration ?? "?"}s)`);
 }
 
@@ -92,6 +97,8 @@ if (heroClips.length && !existsSync(heroOut)) {
 const bigImages = [
   ["students/Madison S/Profile/madison-profile.png", "madison-portrait.jpg", 1000],
   ["students/Sayf B/profile/sayf-profile.png", "sayf-portrait.jpg", 1000],
+  ["students/Max/Profile/max-profile.png", "max-portrait.jpg", 1000],
+  ["students/Sebastian/Profile/sebastian-profile.png", "sebastian-portrait.jpg", 1000],
 ];
 for (const [src, name, w] of bigImages) {
   const out = join(OUT, name);

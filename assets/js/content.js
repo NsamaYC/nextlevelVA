@@ -8,6 +8,8 @@
   const K = "students/Kegan B";
   const M = "students/Madison S";
   const S = "students/Sayf B";
+  const MX = "students/Max";
+  const SB = "students/Sebastian";
 
   window.NL_CONTENT = {
     brand: {
@@ -570,6 +572,248 @@
                   "The focus is not on swinging harder but on creating a more efficient, controlled, and repeatable return technique.",
                 ],
                 footnote: "Main reminder: TWO STEPS FORWARD → SPLIT STEP → SHORT SHOULDER TURN → CONTACT IN FRONT → EXTEND → FOLLOW THROUGH",
+              },
+            ],
+          },
+        ],
+      },
+
+      /* =====================================================================
+         MAX G
+         ===================================================================== */
+      {
+        id: "max-g",
+        name: "Max G",
+        firstName: "Max",
+        lastName: "G",
+        cover: `${MX}/Profile/max-cover.png`,
+        portrait: "assets/media/max-portrait.jpg",
+        portraitFallback: `${MX}/Profile/max-profile.png`,
+        portraitPosition: "45% 35%",
+        slideshow: [
+          { src: `${MX}/Profile/slideshow/max-forehand.png`, caption: "Forehand — Front View" },
+          { src: `${MX}/Profile/slideshow/max-forehand-run.png`, caption: "Forehand on the Run" },
+          { src: `${MX}/Profile/slideshow/max-backhand.png`, caption: "Backhand — Side View" },
+          { src: `${MX}/Profile/slideshow/max-backhand-run.png`, caption: "Backhand on the Run" },
+        ],
+        videos: [
+          { src: `${MX}/Videos/forehand front view.mp4`, title: "Forehand", tag: "Front View" },
+          { src: `${MX}/Videos/forehand on the run side view.mp4`, title: "Forehand on the Run", tag: "Side View" },
+          { src: `${MX}/Videos/backhand side view.mp4`, title: "Backhand", tag: "Side View" },
+          { src: `${MX}/Videos/Backhand on the run (1).mp4`, title: "Backhand on the Run", tag: "Dynamic" },
+        ],
+        drills: [
+          {
+            id: "forehand-front-view",
+            title: "Forehand – Front View Video Analysis",
+            category: "Forehand",
+            view: "Front View",
+            video: `${MX}/Videos/forehand front view.mp4`,
+            overview:
+              "Max – Forehand (Front View): Preparation, Shoulder Rotation, Racket Drop, Extension & Follow-Through.",
+            sections: [
+              {
+                eyebrow: "Technical Focus",
+                title: "Forehand – Front View Video Analysis",
+                cards: [
+                  { label: "Preparation", text: "Elbow needs to be higher and away from the body, with the racket head pointing upward." },
+                  { label: "Shoulder Rotation", text: "Needs to rotate the left shoulder farther back during preparation to create a better unit turn." },
+                  { label: "Racket Drop", text: "The racket face needs to point downward during the drop before accelerating forward toward contact." },
+                  { label: "Extension", text: "After contact, the elbow needs to extend much farther through the ball. Currently, he’s limiting his extension." },
+                  { label: "Follow-Through", text: "Needs to relax the arm and allow the elbow to bend naturally during the finish. Currently, he keeps the arm too stiff and straight. The edge of the racket should finish by tapping the back of his shoulder." },
+                ],
+                footnote:
+                  "Main Focus: Elbow up, racket head up, full left-shoulder rotation, racket face down, extend through contact, and finish with the racket edge touching the back of the shoulder.",
+              },
+            ],
+          },
+          {
+            id: "forehand-on-the-run",
+            title: "Forehand on the Run – Video Analysis",
+            category: "Footwork",
+            view: "Side View",
+            video: `${MX}/Videos/forehand on the run side view.mp4`,
+            overview:
+              "Max – Forehand on the Run: Hip Rotation, Elbow Position, Legs & Mogul Step.",
+            sections: [
+              {
+                eyebrow: "Dynamic Movement",
+                title: "Forehand on the Run – Video Analysis",
+                cards: [
+                  { label: "Hip Rotation", text: "Not turning his hips early enough. The right foot needs to pivot outward immediately to open the hips and accelerate toward the ball." },
+                  { label: "Elbow Position", text: "The elbow is too close to his body. It needs to be higher and pointing outward to create better spacing and extension." },
+                  { label: "Legs", text: "Needs to bend his knees and get underneath the ball instead of reaching with his upper body." },
+                  { label: "Mogul Step", text: "At contact, needs to load and hit off the outside (right) leg, using the hips and legs to generate power while maintaining balance. Avoid crossing the legs too early." },
+                ],
+              },
+            ],
+          },
+          {
+            id: "backhand-side-view",
+            title: "Backhand – Side View Video Analysis",
+            category: "Backhand",
+            view: "Side View",
+            video: `${MX}/Videos/backhand side view.mp4`,
+            overview:
+              "Max – Backhand (Side View): Preparation, Left Elbow, Racket Drop & Legs, Contact & Extension, and Racket Face.",
+            sections: [
+              {
+                eyebrow: "Technical Focus",
+                title: "Backhand – Side View Video Analysis",
+                cards: [
+                  { label: "Preparation", text: "During the shoulder turn, the racket head needs to point upward. The right shoulder should rotate farther back to create better preparation." },
+                  { label: "Left Elbow", text: "The left arm needs to be almost fully extended. Currently, the elbow is too bent, limiting extension and racket control." },
+                  { label: "Racket Drop & Legs", text: "After preparing with the racket head up, drop the racket head below the ball and use the legs to generate power through contact." },
+                  { label: "Contact & Extension", text: "After contact, extend through the ball and continue the follow-through with the left hand." },
+                  { label: "Racket Face", text: "Avoid opening the right hand too early, which causes the racket face to open and reduces control." },
+                ],
+              },
+            ],
+          },
+          {
+            id: "backhand-on-the-run",
+            title: "Backhand on the Run – Video Analysis",
+            category: "Footwork",
+            view: "Dynamic",
+            video: `${MX}/Videos/Backhand on the run (1).mp4`,
+            overview:
+              "Max – Backhand on the Run: Hip Rotation, Footwork & Outside Leg (Mogul Step).",
+            sections: [
+              {
+                eyebrow: "Dynamic Movement",
+                title: "Backhand on the Run – Video Analysis",
+                cards: [
+                  { label: "Hip Rotation", text: "Not turning his hips early enough. The left foot needs to pivot outward immediately to unlock the hips and allow him to accelerate toward the ball." },
+                  { label: "Footwork", text: "Needs a quicker first step and better hip rotation to move efficiently instead of running with his hips closed." },
+                  { label: "Outside Leg (Mogul Step)", text: "At contact, he needs to load and hit off his outside (left) leg, not his inside leg. Currently, he’s crossing his legs, which affects his balance, stability, and recovery." },
+                ],
+                footnote:
+                  "Main Focus: Early left-foot pivot, open the hips, accelerate to the ball, and execute the mogul step using the outside leg without crossing over.",
+              },
+            ],
+          },
+        ],
+      },
+
+      /* =====================================================================
+         SEBASTIAN G
+         ===================================================================== */
+      {
+        id: "sebastian-g",
+        name: "Sebastian G",
+        firstName: "Sebastian",
+        lastName: "G",
+        cover: `${SB}/Profile/sebastian-cover.png`,
+        portrait: "assets/media/sebastian-portrait.jpg",
+        portraitFallback: `${SB}/Profile/sebastian-profile.png`,
+        portraitPosition: "45% 35%",
+        slideshow: [
+          { src: `${SB}/Profile/slideshow/sebastian-forehand.png`, caption: "Forehand — Front View" },
+          { src: `${SB}/Profile/slideshow/sebastian-forehand-run.png`, caption: "Forehand on the Run" },
+          { src: `${SB}/Profile/slideshow/sebastian-backhand.png`, caption: "Backhand Analysis" },
+          { src: `${SB}/Profile/slideshow/sebastian-backhand-run.png`, caption: "Backhand on the Run" },
+        ],
+        videos: [
+          { src: `${SB}/Videos/forehand Frontview.mp4`, title: "Forehand", tag: "Front View" },
+          { src: `${SB}/Videos/forehand on the run.mp4`, title: "Forehand on the Run", tag: "Dynamic" },
+          { src: `${SB}/Videos/backhand (1).mp4`, title: "Backhand Analysis", tag: "Side View" },
+          { src: `${SB}/Videos/backhand on the run.mp4`, title: "Backhand on the Run", tag: "Footwork" },
+        ],
+        drills: [
+          {
+            id: "forehand-front-view",
+            title: "Forehand Video Analysis",
+            category: "Forehand",
+            view: "Front View",
+            video: `${SB}/Videos/forehand Frontview.mp4`,
+            overview:
+              "Sebastian – Forehand Video Analysis: Preparation, Shoulder Rotation, Hip & Foot Rotation, Extension After Contact & Follow-Through.",
+            sections: [
+              {
+                eyebrow: "Technical Focus",
+                title: "Sebastian – Forehand Video Analysis",
+                cards: [
+                  { label: "Preparation", text: "The elbow is dropping and bending too much. Needs to keep the elbow higher, with the arm almost fully extended (not locked) and the racket head pointing upward during the shoulder turn." },
+                  { label: "Shoulder Rotation", text: "Needs a better shoulder turn while maintaining the elbow up and away from the body." },
+                  { label: "Hip & Foot Rotation", text: "Not using his hips and feet enough to rotate through the shot. Needs to pivot with the foot and rotate the hips to generate more power." },
+                  { label: "Extension After Contact", text: "Needs to extend the elbow and racket farther through the ball instead of shortening the swing." },
+                  { label: "Follow-Through", text: "Currently stopping the racket in the middle. Needs to complete the full follow-through, keeping the elbow up and allowing the racket to wrap around until the edge of the racket taps the back of his shoulder." },
+                ],
+                footnote:
+                  "Main Focus: Elbow up, racket head up, almost full arm extension during preparation, hip and foot rotation, extend through contact, and finish all the way around with the racket edge touching the back of the shoulder.",
+              },
+            ],
+          },
+          {
+            id: "forehand-on-the-run",
+            title: "Forehand on the Run – Video Analysis",
+            category: "Footwork",
+            view: "Dynamic",
+            video: `${SB}/Videos/forehand on the run.mp4`,
+            overview:
+              "Sebastian – Forehand on the Run: Preparation, Footwork, Body Rotation, Contact Point & Recovery.",
+            sections: [
+              {
+                eyebrow: "Dynamic Movement",
+                title: "Forehand on the Run – Video Analysis",
+                cards: [
+                  { label: "Preparation", text: "Turn the shoulders and hips earlier while moving toward the ball." },
+                  { label: "Footwork", text: "Use running steps instead of shuffling, and turn the right foot outward to prepare for contact." },
+                  { label: "Body Rotation", text: "Rotate through the hips and shoulders instead of relying only on the arm." },
+                  { label: "Contact Point", text: "Maintain balance and extend the racket through the ball." },
+                  { label: "Recovery", text: "Use the outside leg to push off and recover quickly toward the center." },
+                ],
+                footnote:
+                  "Main Focus: Earlier hip rotation, better running footwork, and stronger extension through contact while maintaining balance.",
+              },
+            ],
+          },
+          {
+            id: "backhand-analysis",
+            title: "Backhand Video Analysis",
+            category: "Backhand",
+            view: "Side View",
+            video: `${SB}/Videos/backhand (1).mp4`,
+            overview:
+              "Sebastian – Backhand Video Analysis: Shoulder Turn, Racket Preparation, Footwork & Hips, Contact & Extension, Follow-Through & Recovery.",
+            sections: [
+              {
+                eyebrow: "Technical Focus",
+                title: "Backhand Video Analysis",
+                cards: [
+                  { label: "Shoulder Turn", text: "Rotate the shoulders earlier and more completely. Avoid preparing with the racket facing forward." },
+                  { label: "Racket Preparation", text: "Keep the racket head up, with the strings facing sideways during the unit turn." },
+                  { label: "Footwork & Hips", text: "Use the legs and hips to rotate through the shot instead of relying only on the arms." },
+                  { label: "Contact & Extension", text: "Extend both arms forward through the contact point. Avoid cutting the swing short." },
+                  { label: "Follow-Through", text: "Finish the racket completely over the shoulder with full body rotation." },
+                  { label: "Recovery", text: "Recover quickly with a crossover step followed by adjustment shuffles." },
+                ],
+                footnote:
+                  "Main Focus: Earlier preparation, better hip rotation, full extension, and a complete follow-through.",
+              },
+            ],
+          },
+          {
+            id: "backhand-on-the-run",
+            title: "Backhand on the Run – Video Analysis",
+            category: "Footwork",
+            view: "Dynamic",
+            video: `${SB}/Videos/backhand on the run.mp4`,
+            overview:
+              "Sebastian – Backhand on the Run: Shoulder Turn, Hip Rotation, Follow-Through, Mogul Step & Recovery.",
+            sections: [
+              {
+                eyebrow: "Dynamic Movement",
+                title: "Backhand on the Run – Video Analysis",
+                cards: [
+                  { label: "Shoulder Turn", text: "Rotate the shoulders more during preparation. The racket edge should point up, with the strings facing sideways instead of forward." },
+                  { label: "Hip Rotation", text: "Turn the hips and outside foot earlier to run efficiently toward the ball." },
+                  { label: "Follow-Through", text: "Stop pushing the ball halfway. Use the legs to generate power and finish the racket fully across the opposite shoulder." },
+                  { label: "Mogul Step", text: "Use a proper mogul movement through contact to maintain balance and initiate recovery." },
+                  { label: "Recovery", text: "Push off with the outside leg, crossover first, then use shuffle steps to recover into position." },
+                ],
+                footnote:
+                  "Main Focus: Bigger shoulder turn, full follow-through, better hip rotation, and explosive recovery footwork.",
               },
             ],
           },

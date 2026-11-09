@@ -56,6 +56,20 @@ window.NL_CONFIG = {
         role: "player",
       },
       {
+        username: "max@nextlevel.com",
+        password: "Password123!",
+        name: "Max G",
+        playerId: "max-g",
+        role: "player",
+      },
+      {
+        username: "sebastian@nextlevel.com",
+        password: "Password123!",
+        name: "Sebastian G",
+        playerId: "sebastian-g",
+        role: "player",
+      },
+      {
         username: "coach@nextlevel.com",
         password: "CoachPassword123!",
         name: "Head Coach",

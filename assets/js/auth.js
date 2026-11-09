@@ -34,6 +34,20 @@
       role: "player",
     },
     {
+      username: "max@nextlevel.com",
+      password: "Password123!",
+      name: "Max G",
+      playerId: "max-g",
+      role: "player",
+    },
+    {
+      username: "sebastian@nextlevel.com",
+      password: "Password123!",
+      name: "Sebastian G",
+      playerId: "sebastian-g",
+      role: "player",
+    },
+    {
       username: "coach@nextlevel.com",
       password: "CoachPassword123!",
       name: "Head Coach",
@@ -171,6 +185,8 @@
       if (email.toLowerCase().includes("kegan")) playerId = "kegan-b";
       else if (email.toLowerCase().includes("madison")) playerId = "madison-s";
       else if (email.toLowerCase().includes("sayf")) playerId = "sayf-b";
+      else if (email.toLowerCase().includes("max")) playerId = "max-g";
+      else if (email.toLowerCase().includes("sebastian")) playerId = "sebastian-g";
       else if (role === "coach") playerId = "all";
       else playerId = "kegan-b"; // default fallback
     }
@@ -229,6 +245,28 @@
           playerId: "sayf-b",
           accessToken: "demo-jwt-sayf-b",
           idToken: "demo-id-token-sayf-b",
+          expiresAt: Date.now() + 7200 * 1000,
+        };
+      }
+      if (cleanU === "max" || cleanU === "max-g" || cleanU === "max g") {
+        return {
+          username: "max@nextlevel.com",
+          name: "Max G",
+          role: "player",
+          playerId: "max-g",
+          accessToken: "demo-jwt-max-g",
+          idToken: "demo-id-token-max-g",
+          expiresAt: Date.now() + 7200 * 1000,
+        };
+      }
+      if (cleanU === "sebastian" || cleanU === "sebastian-g" || cleanU === "sebastian g") {
+        return {
+          username: "sebastian@nextlevel.com",
+          name: "Sebastian G",
+          role: "player",
+          playerId: "sebastian-g",
+          accessToken: "demo-jwt-sebastian-g",
+          idToken: "demo-id-token-sebastian-g",
           expiresAt: Date.now() + 7200 * 1000,
         };
       }
@@ -342,6 +380,12 @@
             </button>
             <button class="btn btn--dark btn--sm" data-demo-user="sayf">
               <span>👤 Sayf Baig</span>
+            </button>
+            <button class="btn btn--dark btn--sm" data-demo-user="max">
+              <span>👤 Max G</span>
+            </button>
+            <button class="btn btn--dark btn--sm" data-demo-user="sebastian">
+              <span>👤 Sebastian G</span>
             </button>
             <button class="btn btn--dark btn--sm" data-demo-user="coach">
               <span>🎓 Head Coach (All Access)</span>
