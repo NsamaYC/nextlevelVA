@@ -1,8 +1,9 @@
 /**
  * NEXT LEVEL — Authentication & Security Service
  * ---------------------------------------------------------------------------
- * Provides AWS Cognito User Pool integration, session management, and
- * per-player access control for student profiles, drills, and video catalogs.
+ * Provides AWS Cognito User Pool integration, 6-digit player access code
+ * authentication, session management, and strict per-player access control
+ * for student profiles, drills, and video catalogs.
  */
 (() => {
   "use strict";
@@ -10,46 +11,60 @@
   const STORAGE_KEY = "nl_player_auth_session";
   const CONFIG = (window.NL_CONFIG && window.NL_CONFIG.auth) || {};
 
-  // Default demo accounts mapped to student profiles
+  // Hardcoded 6-digit access codes mapped to individual student profiles + Head Coach
   const DEFAULT_DEMO_USERS = [
     {
       username: "kegan@nextlevel.com",
-      password: "Password123!",
+      accessCode: "482915",
+      password: "482915",
       name: "Kegan Barkley",
       playerId: "kegan-b",
       role: "player",
     },
     {
       username: "madison@nextlevel.com",
-      password: "Password123!",
+      accessCode: "739204",
+      password: "739204",
       name: "Madison Staine",
       playerId: "madison-s",
       role: "player",
     },
     {
       username: "sayf@nextlevel.com",
-      password: "Password123!",
+      accessCode: "615839",
+      password: "615839",
       name: "Sayf Baig",
       playerId: "sayf-b",
       role: "player",
     },
     {
       username: "max@nextlevel.com",
-      password: "Password123!",
-      name: "Max G",
+      accessCode: "294761",
+      password: "294761",
+      name: "Max Melgarejo Gamiz",
       playerId: "max-g",
       role: "player",
     },
     {
       username: "sebastian@nextlevel.com",
-      password: "Password123!",
-      name: "Sebastian G",
+      accessCode: "850342",
+      password: "850342",
+      name: "Sebastian Melgarejo Gamiz",
       playerId: "sebastian-g",
       role: "player",
     },
     {
+      username: "tara@nextlevel.com",
+      accessCode: "527196",
+      password: "527196",
+      name: "Tara McLaren",
+      playerId: "tara-m",
+      role: "player",
+    },
+    {
       username: "coach@nextlevel.com",
-      password: "CoachPassword123!",
+      accessCode: "904812",
+      password: "904812",
       name: "Head Coach",
       playerId: "all",
       role: "coach",
@@ -72,7 +87,7 @@
     }
   }
 
-  function setSession(session, persist = false) {
+  function setSession(session, persist = true) {
     const data = JSON.stringify(session);
     sessionStorage.setItem(STORAGE_KEY, data);
     if (persist) {
@@ -117,14 +132,14 @@
 
   /**
    * Evaluates if current authenticated user has access to a specific player ID.
-   * - In demo mode (CONFIG.demoMode !== false), all demo player profiles are viewable.
-   * - In strict mode, coaches have access to all players ("all"), students to their own.
+   * - Coaches ("role": "coach") can access all players.
+   * - Players ("role": "player") can ONLY access their own assigned playerId.
    */
   function canAccessPlayer(playerId) {
-    if (CONFIG.demoMode !== false) return true;
+    if (CONFIG.demoMode === true) return true;
     const u = getUser();
     if (!u) return false;
-    if (u.role === "coach") return true;
+    if (u.role === "coach" || u.playerId === "all") return true;
     return u.playerId === playerId;
   }
 
@@ -166,7 +181,6 @@
       throw new Error("Multi-factor or custom challenge not yet supported in direct login");
     }
 
-    // Decode ID token payload to read custom attributes (e.g. custom:playerId, custom:role)
     const tokenParts = (authRes.IdToken || "").split(".");
     let claims = {};
     if (tokenParts.length === 3) {
@@ -175,7 +189,6 @@
       } catch {}
     }
 
-    // Map cognito user attributes or email fallback to player
     const email = claims.email || username;
     let playerId = claims["custom:playerId"] || null;
     let role = claims["custom:role"] || (email.includes("coach") ? "coach" : "player");
@@ -187,8 +200,8 @@
       else if (email.toLowerCase().includes("sayf")) playerId = "sayf-b";
       else if (email.toLowerCase().includes("max")) playerId = "max-g";
       else if (email.toLowerCase().includes("sebastian")) playerId = "sebastian-g";
+      else if (email.toLowerCase().includes("tara")) playerId = "tara-m";
       else if (role === "coach") playerId = "all";
-      else playerId = "kegan-b"; // default fallback
     }
 
     return {
@@ -203,121 +216,77 @@
     };
   }
 
-  /* ---------------- Demo Fallback Authentication ---------------- */
-  function authenticateDemo(username, password) {
-    const demoUsers = CONFIG.demoUsers || DEFAULT_DEMO_USERS;
-    const cleanU = (username || "").trim().toLowerCase();
-    const user = demoUsers.find(
-      (u) =>
-        (u.username.toLowerCase() === cleanU || u.playerId.toLowerCase() === cleanU || u.name.toLowerCase() === cleanU) &&
-        u.password === password
+  /* ---------------- 6-Digit Access Code Authentication ---------------- */
+  function authenticateWithAccessCode(targetIdentifier, password) {
+    const users = CONFIG.demoUsers || DEFAULT_DEMO_USERS;
+    const cleanId = (targetIdentifier || "").trim().toLowerCase();
+    const cleanCode = (password || "").trim();
+
+    if (!cleanCode) {
+      throw new Error("Please enter your 6-digit access code.");
+    }
+
+    // Find user matching the 6-digit access code
+    const matchedByCode = users.find(
+      (u) => (u.accessCode && u.accessCode === cleanCode) || u.password === cleanCode
     );
 
-    if (!user) {
-      // Also match simple player names as quick demo credentials
-      if (cleanU === "kegan" || cleanU === "kegan-b") {
-        return {
-          username: "kegan@nextlevel.com",
-          name: "Kegan Barkley",
-          role: "player",
-          playerId: "kegan-b",
-          accessToken: "demo-jwt-kegan-b",
-          idToken: "demo-id-token-kegan-b",
-          expiresAt: Date.now() + 7200 * 1000,
-        };
+    if (!matchedByCode) {
+      throw new Error("Invalid 6-digit access code. Please check your player code and try again.");
+    }
+
+    // If a specific player/profile was selected or targeted, verify this code is authorized for it
+    if (cleanId && cleanId !== "any") {
+      const targetUser = users.find(
+        (u) =>
+          u.playerId.toLowerCase() === cleanId ||
+          u.username.toLowerCase() === cleanId ||
+          u.name.toLowerCase() === cleanId
+      );
+
+      if (targetUser) {
+        const isCoachCode = matchedByCode.role === "coach" || matchedByCode.playerId === "all";
+        const isExactPlayerMatch = matchedByCode.playerId === targetUser.playerId;
+        if (!isExactPlayerMatch && !isCoachCode) {
+          throw new Error(
+            `Access denied: That 6-digit code belongs to another student and cannot unlock ${targetUser.name}'s profile.`
+          );
+        }
       }
-      if (cleanU === "madison" || cleanU === "madison-s") {
-        return {
-          username: "madison@nextlevel.com",
-          name: "Madison Staine",
-          role: "player",
-          playerId: "madison-s",
-          accessToken: "demo-jwt-madison-s",
-          idToken: "demo-id-token-madison-s",
-          expiresAt: Date.now() + 7200 * 1000,
-        };
-      }
-      if (cleanU === "sayf" || cleanU === "sayf-b") {
-        return {
-          username: "sayf@nextlevel.com",
-          name: "Sayf Baig",
-          role: "player",
-          playerId: "sayf-b",
-          accessToken: "demo-jwt-sayf-b",
-          idToken: "demo-id-token-sayf-b",
-          expiresAt: Date.now() + 7200 * 1000,
-        };
-      }
-      if (cleanU === "max" || cleanU === "max-g" || cleanU === "max g") {
-        return {
-          username: "max@nextlevel.com",
-          name: "Max G",
-          role: "player",
-          playerId: "max-g",
-          accessToken: "demo-jwt-max-g",
-          idToken: "demo-id-token-max-g",
-          expiresAt: Date.now() + 7200 * 1000,
-        };
-      }
-      if (cleanU === "sebastian" || cleanU === "sebastian-g" || cleanU === "sebastian g") {
-        return {
-          username: "sebastian@nextlevel.com",
-          name: "Sebastian G",
-          role: "player",
-          playerId: "sebastian-g",
-          accessToken: "demo-jwt-sebastian-g",
-          idToken: "demo-id-token-sebastian-g",
-          expiresAt: Date.now() + 7200 * 1000,
-        };
-      }
-      if (cleanU === "coach") {
-        return {
-          username: "coach@nextlevel.com",
-          name: "Head Coach",
-          role: "coach",
-          playerId: "all",
-          accessToken: "demo-jwt-coach",
-          idToken: "demo-id-token-coach",
-          expiresAt: Date.now() + 7200 * 1000,
-        };
-      }
-      throw new Error("Invalid username or password. Check credentials or select a demo account.");
     }
 
     return {
-      username: user.username,
-      name: user.name,
-      role: user.role,
-      playerId: user.playerId,
-      accessToken: `demo-jwt-${user.playerId}`,
-      idToken: `demo-id-token-${user.playerId}`,
-      expiresAt: Date.now() + 7200 * 1000,
+      username: matchedByCode.username,
+      name: matchedByCode.name,
+      role: matchedByCode.role,
+      playerId: matchedByCode.playerId,
+      accessToken: `nl-code-jwt-${matchedByCode.playerId}`,
+      idToken: `nl-code-id-${matchedByCode.playerId}`,
+      expiresAt: Date.now() + 12 * 3600 * 1000,
     };
   }
 
   /* ---------------- Public Login Method ---------------- */
-  async function login(username, password, remember = true) {
-    // 1. Try real AWS Cognito if enabled & configured
+  async function login(usernameOrPlayerId, password, remember = true) {
+    // 1. Try real AWS Cognito if enabled & configured with a real Client ID
     if (CONFIG.enabled && CONFIG.userPoolWebClientId && !CONFIG.userPoolWebClientId.includes("xxxx")) {
       try {
-        const session = await authenticateWithCognito(username, password);
+        const session = await authenticateWithCognito(usernameOrPlayerId, password);
         setSession(session, remember);
         return session;
       } catch (err) {
-        if (!CONFIG.demoMode) throw err;
-        console.warn("Cognito login failed, attempting demo account match:", err.message);
+        console.warn("Cognito login failed, checking access code:", err.message);
       }
     }
 
-    // 2. Demo fallback login
-    const session = authenticateDemo(username, password);
+    // 2. Authenticate with unique 6-digit access code
+    const session = authenticateWithAccessCode(usernameOrPlayerId, password);
     setSession(session, remember);
     return session;
   }
 
   function logout() {
     clearSession();
-    // If on a protected player or drill page, return to home or reload
     if (location.pathname.includes("player.html") || location.pathname.includes("drill.html")) {
       location.href = "index.html";
     }
@@ -328,6 +297,8 @@
 
   function ensureModal() {
     if (modalEl) return modalEl;
+    const users = CONFIG.demoUsers || DEFAULT_DEMO_USERS;
+
     modalEl = document.createElement("div");
     modalEl.className = "auth-modal";
     modalEl.setAttribute("role", "dialog");
@@ -346,58 +317,53 @@
               <rect x="3" y="11" width="18" height="11" rx="2" ry="2"/>
               <path d="M7 11V7a5 5 0 0 1 10 0v4"/>
             </svg>
-            <span>AWS COGNITO SECURE PORTAL</span>
+            <span>PRIVATE PLAYER PORTAL</span>
           </div>
-          <h2 class="display h-md" id="auth-title">Player Sign In</h2>
-          <p class="auth-modal__sub" id="auth-desc">Enter your credentials to access private player analysis, training reports, and video archives.</p>
+          <h2 class="display h-md" id="auth-title">Enter Player Access Code</h2>
+          <p class="auth-modal__sub" id="auth-desc">Enter your personal 6-digit access code to unlock your private drills and video analysis archive.</p>
         </div>
 
         <form class="auth-modal__form" id="auth-form">
           <div class="auth-field">
-            <label for="auth-email">Player Email / Username</label>
-            <input type="text" id="auth-email" required placeholder="player@nextlevel.com" autocomplete="username">
+            <label for="auth-profile">Player / Coach Profile</label>
+            <select id="auth-profile" style="width:100%;height:46px;padding:0 14px;border-radius:var(--r-sm);border:1px solid var(--line-strong);background:var(--white);color:var(--ink);font-family:var(--font-body);font-size:0.95rem;font-weight:500;">
+              <option value="any">Auto-Detect from 6-Digit Code</option>
+              ${users
+                .map(
+                  (u) =>
+                    `<option value="${u.playerId}">${
+                      u.role === "coach" ? `🎓 ${u.name} (All Profiles)` : `👤 ${u.name}`
+                    }</option>`
+                )
+                .join("")}
+            </select>
           </div>
           <div class="auth-field">
-            <label for="auth-pwd">Password</label>
-            <input type="password" id="auth-pwd" required placeholder="••••••••••••" autocomplete="current-password">
+            <label for="auth-pwd">6-Digit Access Code</label>
+            <input
+              type="password"
+              id="auth-pwd"
+              required
+              maxlength="6"
+              inputmode="numeric"
+              pattern="[0-9A-Za-z!@#$%^&*]{4,20}"
+              placeholder="• • • • • •"
+              autocomplete="one-time-code"
+              style="letter-spacing:0.35em;font-size:1.25rem;font-weight:600;text-align:center;"
+            >
           </div>
           <div class="auth-msg" id="auth-msg" role="alert"></div>
 
           <button type="submit" class="btn btn--lime" style="width:100%" id="auth-submit">
-            Sign In to Portal
+            Unlock Portal
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
           </button>
         </form>
-
-        <div class="auth-modal__demo">
-          <span class="label">Quick Demo Access</span>
-          <div class="auth-modal__demo-btns">
-            <button class="btn btn--dark btn--sm" data-demo-user="kegan">
-              <span>👤 Kegan Barkley</span>
-            </button>
-            <button class="btn btn--dark btn--sm" data-demo-user="madison">
-              <span>👤 Madison Staine</span>
-            </button>
-            <button class="btn btn--dark btn--sm" data-demo-user="sayf">
-              <span>👤 Sayf Baig</span>
-            </button>
-            <button class="btn btn--dark btn--sm" data-demo-user="max">
-              <span>👤 Max G</span>
-            </button>
-            <button class="btn btn--dark btn--sm" data-demo-user="sebastian">
-              <span>👤 Sebastian G</span>
-            </button>
-            <button class="btn btn--dark btn--sm" data-demo-user="coach">
-              <span>🎓 Head Coach (All Access)</span>
-            </button>
-          </div>
-        </div>
       </div>
     `;
 
     document.body.appendChild(modalEl);
 
-    // Event listeners
     const closeBtn = modalEl.querySelector("#auth-close");
     const backdrop = modalEl.querySelector(".auth-modal__backdrop");
     const form = modalEl.querySelector("#auth-form");
@@ -407,7 +373,7 @@
 
     form.addEventListener("submit", async (e) => {
       e.preventDefault();
-      const email = modalEl.querySelector("#auth-email").value;
+      const selectedProfile = modalEl.querySelector("#auth-profile").value;
       const pwd = modalEl.querySelector("#auth-pwd").value;
       const msg = modalEl.querySelector("#auth-msg");
       const btn = modalEl.querySelector("#auth-submit");
@@ -415,43 +381,34 @@
       msg.textContent = "";
       msg.className = "auth-msg";
       btn.disabled = true;
-      btn.textContent = "Authenticating...";
+      btn.textContent = "Verifying Code...";
 
       try {
-        await login(email, pwd);
+        await login(selectedProfile, pwd);
+        const signedInUser = getUser();
         closeLoginModal();
         if (modalEl._onSuccess) {
-          modalEl._onSuccess(getUser());
+          modalEl._onSuccess(signedInUser);
+        } else if (
+          location.pathname.endsWith("index.html") ||
+          location.pathname === "/" ||
+          location.pathname.endsWith("/")
+        ) {
+          if (signedInUser && signedInUser.role !== "coach" && signedInUser.playerId) {
+            location.href = `player.html?id=${encodeURIComponent(signedInUser.playerId)}`;
+          } else {
+            location.reload();
+          }
         } else {
           location.reload();
         }
       } catch (err) {
-        msg.textContent = err.message || "Authentication failed";
+        msg.textContent = err.message || "Invalid access code";
         msg.className = "auth-msg is-error";
       } finally {
         btn.disabled = false;
-        btn.innerHTML = `Sign In to Portal <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg>`;
+        btn.innerHTML = `Unlock Portal <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg>`;
       }
-    });
-
-    // Demo buttons
-    modalEl.querySelectorAll("[data-demo-user]").forEach((b) => {
-      b.addEventListener("click", async () => {
-        const who = b.dataset.demoUser;
-        const msg = modalEl.querySelector("#auth-msg");
-        try {
-          await login(who, who === "coach" ? "CoachPassword123!" : "Password123!");
-          closeLoginModal();
-          if (modalEl._onSuccess) {
-            modalEl._onSuccess(getUser());
-          } else {
-            location.reload();
-          }
-        } catch (err) {
-          msg.textContent = err.message;
-          msg.className = "auth-msg is-error";
-        }
-      });
     });
 
     return modalEl;
@@ -461,13 +418,33 @@
     const el = ensureModal();
     el._onSuccess = opts.onSuccess || null;
     const desc = el.querySelector("#auth-desc");
-    if (opts.message) desc.textContent = opts.message;
+    const select = el.querySelector("#auth-profile");
+    const pwdInput = el.querySelector("#auth-pwd");
+    const msg = el.querySelector("#auth-msg");
+
+    if (msg) {
+      msg.textContent = "";
+      msg.className = "auth-msg";
+    }
+    if (pwdInput) pwdInput.value = "";
+
+    if (opts.targetPlayerId && select) {
+      select.value = opts.targetPlayerId;
+    } else if (select) {
+      select.value = "any";
+    }
+
+    if (opts.message && desc) {
+      desc.textContent = opts.message;
+    } else if (desc) {
+      desc.textContent =
+        "Enter your personal 6-digit access code to unlock your private drills and video analysis archive.";
+    }
 
     el.classList.add("is-open");
     document.body.style.overflow = "hidden";
     setTimeout(() => {
-      const input = el.querySelector("#auth-email");
-      input && input.focus();
+      pwdInput && pwdInput.focus();
     }, 100);
   }
 
@@ -480,47 +457,93 @@
   /* ---------------- Gate Screen Helper ---------------- */
   function renderLockScreen(container, reason, targetPlayer) {
     const user = getUser();
+    const targetName = targetPlayer ? targetPlayer.name : "this student";
+    const targetId = targetPlayer ? targetPlayer.id : "any";
+
     container.innerHTML = `
       <section class="auth-gate container">
-        <div class="auth-gate__card reveal">
+        <div class="auth-gate__card reveal is-visible">
           <div class="auth-gate__icon">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
               <rect x="3" y="11" width="18" height="11" rx="2" ry="2"/>
               <path d="M7 11V7a5 5 0 0 1 10 0v4"/>
             </svg>
           </div>
-          <span class="eyebrow" style="color:var(--lime)">Access Restricted</span>
-          <h1 class="display h-lg" style="margin-top:12px">Protected Player Portal</h1>
+          <span class="eyebrow" style="color:var(--court-2)">Access Restricted · Private Profile</span>
+          <h1 class="display h-lg" style="margin-top:12px">${
+            targetPlayer ? `${targetPlayer.name}'s Portal` : "Protected Player Portal"
+          }</h1>
           <p class="lead" style="margin-inline:auto;max-width:54ch;">
             ${
               reason === "unauthenticated"
-                ? "This training profile, stroke analysis, and video archive are restricted to authenticated Next Level students."
-                : `You are currently signed in as <b>${user.name}</b>. This profile is private to <b>${targetPlayer ? targetPlayer.name : "another student"}</b>.`
+                ? `Enter the 6-digit access code for <b>${targetName}</b> (or Coach code) to view their personal drills and video analysis.`
+                : `You are currently signed in as <b>${user.name}</b>. Your access code only unlocks your own videos and drills. This profile is private to <b>${targetName}</b>.`
             }
           </p>
 
-          <div class="auth-gate__actions">
-            ${
-              reason === "unauthenticated"
-                ? `<button class="btn btn--lime" id="gate-login">Sign In with Player Account <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button>
-                   <a class="btn" href="index.html">Back to Home</a>`
-                : `<a class="btn btn--lime" href="player.html?id=${user.playerId}">Go to My Profile (${user.name}) <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
-                   <button class="btn btn--dark" id="gate-switch">Switch Account</button>`
-            }
-          </div>
+          ${
+            reason === "unauthenticated"
+              ? `
+            <form id="gate-code-form" style="max-width:340px;margin:24px auto 0;display:grid;gap:12px;">
+              <input
+                type="password"
+                id="gate-code-input"
+                required
+                maxlength="6"
+                inputmode="numeric"
+                placeholder="6-Digit Code"
+                autocomplete="one-time-code"
+                aria-label="6-Digit Access Code"
+                style="width:100%;padding:14px 16px;border-radius:var(--r-sm);border:1px solid var(--line-strong);background:var(--white);color:var(--ink);font-size:1.3rem;font-weight:600;letter-spacing:0.3em;text-align:center;"
+              >
+              <div class="auth-msg" id="gate-code-msg" role="alert"></div>
+              <button type="submit" class="btn btn--lime" id="gate-code-submit" style="width:100%;justify-content:center;">
+                Unlock ${targetPlayer ? targetPlayer.firstName + "'s" : "Player"} Profile
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+              </button>
+              <a class="btn" href="index.html" style="width:100%;justify-content:center;">Back to Home</a>
+            </form>
+          `
+              : `
+            <div class="auth-gate__actions">
+              <a class="btn btn--lime" href="player.html?id=${encodeURIComponent(user.playerId)}">
+                Go to My Profile (${user.name})
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+              </a>
+              <button class="btn btn--dark" id="gate-switch">Enter Different Code</button>
+            </div>
+          `
+          }
         </div>
       </section>
     `;
 
-    const loginBtn = container.querySelector("#gate-login");
-    loginBtn && loginBtn.addEventListener("click", () => openLoginModal());
+    const gateForm = container.querySelector("#gate-code-form");
+    if (gateForm) {
+      const codeInput = container.querySelector("#gate-code-input");
+      const msgEl = container.querySelector("#gate-code-msg");
+      setTimeout(() => codeInput && codeInput.focus(), 80);
+
+      gateForm.addEventListener("submit", async (e) => {
+        e.preventDefault();
+        msgEl.textContent = "";
+        msgEl.className = "auth-msg";
+        try {
+          await login(targetId, codeInput.value);
+        } catch (err) {
+          msgEl.textContent = err.message || "Invalid access code";
+          msgEl.className = "auth-msg is-error";
+        }
+      });
+    }
 
     const switchBtn = container.querySelector("#gate-switch");
-    switchBtn &&
+    if (switchBtn) {
       switchBtn.addEventListener("click", () => {
-        logout();
-        openLoginModal();
+        clearSession();
+        openLoginModal({ targetPlayerId: targetId !== "any" ? targetId : undefined });
       });
+    }
   }
 
   // Export API

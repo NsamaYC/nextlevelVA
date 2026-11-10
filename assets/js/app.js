@@ -77,16 +77,15 @@
     if (user) {
       if (user.role === "coach") {
         rightNavHtml = `
-          <span class="user-pill user-pill--coach" title="Signed in as Head Coach">🎓 Coach Access</span>
-          ${C.players.map((p) => `<a href="${playerUrl(p)}" ${page === "player" && params.get("id") === p.id ? 'aria-current="page"' : ""}>${esc(p.name)}</a>`).join("")}
-          <button class="btn btn--sm btn--light" id="btn-logout" aria-label="Sign out">Log Out</button>
+          <span class="user-pill user-pill--coach" title="Signed in as Head Coach">🎓 Coach Access (All ${C.players.length} Profiles)</span>
+          <button class="btn btn--sm" id="btn-logout" aria-label="Sign out">Log Out</button>
         `;
       } else {
         const myPlayer = C.players.find((x) => x.id === user.playerId) || C.players[0];
         rightNavHtml = `
           <span class="user-pill" title="Signed in as ${esc(user.name)}">👤 ${esc(user.name)}</span>
           <a href="${playerUrl(myPlayer)}" ${page === "player" && params.get("id") === myPlayer.id ? 'aria-current="page"' : ""}>My Profile</a>
-          <button class="btn btn--sm btn--light" id="btn-logout" aria-label="Sign out">Log Out</button>
+          <button class="btn btn--sm" id="btn-logout" aria-label="Sign out">Log Out</button>
         `;
       }
     } else {
@@ -98,7 +97,15 @@
       `;
     }
 
-    const headerSlot = $("#site-header");
+    const visiblePlayers =
+      user && user.role !== "coach"
+        ? C.players.filter((x) => x.id === user.playerId)
+        : C.players;
+
+    const oldMobileMenu = $("#mobile-menu");
+    if (oldMobileMenu) oldMobileMenu.remove();
+
+    const headerSlot = $("#site-header") || $("#header");
     if (headerSlot) {
       headerSlot.outerHTML = `
       <header class="site-header" id="header">
@@ -106,11 +113,11 @@
           <nav class="nav" aria-label="Primary">
             <div class="nav-dropdown-item">
               <a href="index.html#players" ${page === "player" || page === "drill" ? 'aria-current="page"' : ""}>
-                Players <span class="nav-count">${C.players.length}</span>
+                ${user && user.role !== "coach" ? "My Portal" : `Players <span class="nav-count">${visiblePlayers.length}</span>`}
                 <svg class="nav-chevron" viewBox="0 0 24 24" width="11" height="11" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg>
               </a>
               <div class="nav-dropdown-menu">
-                ${C.players.map((p) => `<a href="${playerUrl(p)}" ${page === "player" && params.get("id") === p.id ? 'class="is-current"' : ""}>👤 ${esc(p.name)}</a>`).join("")}
+                ${visiblePlayers.map((p) => `<a href="${playerUrl(p)}" ${page === "player" && params.get("id") === p.id ? 'class="is-current"' : ""}>👤 ${esc(p.name)}</a>`).join("")}
               </div>
             </div>
           </nav>
@@ -124,7 +131,7 @@
       <div class="mobile-menu" id="mobile-menu" aria-hidden="true">
         <a href="index.html">Home</a>
         <span style="font-size:0.8rem;text-transform:uppercase;letter-spacing:0.12em;color:var(--lime);display:block;margin-top:16px;margin-bottom:6px">Player Profiles</span>
-        ${C.players.map((p) => `<a href="${playerUrl(p)}">${esc(p.name)}</a>`).join("")}
+        ${visiblePlayers.map((p) => `<a href="${playerUrl(p)}">${esc(p.name)}</a>`).join("")}
         ${user ? `<span style="font-size:1.1rem;color:var(--muted);display:block;margin-top:18px">Signed in as ${esc(user.name)}</span>` : ""}
         ${user ? `<button class="btn btn--light" id="btn-m-logout" style="margin-top:14px">Log Out</button>` : `<button class="btn btn--lime" id="btn-m-login" style="margin-top:20px">Player Sign In</button>`}
       </div>`;
@@ -142,8 +149,9 @@
       mLogoutBtn && mLogoutBtn.addEventListener("click", () => auth && auth.logout());
     }
 
-    const footerSlot = $("#site-footer");
+    const footerSlot = $("#site-footer") || $(".site-footer");
     if (footerSlot) {
+      const footerTargetId = user && user.role !== "coach" && user.playerId ? user.playerId : "kegan-b";
       footerSlot.outerHTML = `
       <footer class="site-footer">
         <div class="container">
@@ -153,16 +161,16 @@
               <p>Player training portal and video analysis archive.</p>
             </div>
             <div>
-              <h4>Demo Profiles</h4>
-              <ul>${C.players.map((p) => `<li><a href="${playerUrl(p)}">${esc(p.name)}</a></li>`).join("")}</ul>
+              <h4>Player Portals</h4>
+              <ul>${visiblePlayers.map((p) => `<li><a href="${playerUrl(p)}">${esc(p.name)}</a></li>`).join("")}</ul>
             </div>
             <div>
               <h4>Training System</h4>
               <ul>
-                <li><a href="player.html?id=kegan-b#report">Training Reports</a></li>
-                <li><a href="player.html?id=kegan-b#strokes">Stroke Diagnostics</a></li>
-                <li><a href="player.html?id=kegan-b#drills">Personal Drills</a></li>
-                <li><a href="player.html?id=kegan-b#videos">Video Catalog</a></li>
+                <li><a href="player.html?id=${encodeURIComponent(footerTargetId)}#report">Training Reports</a></li>
+                <li><a href="player.html?id=${encodeURIComponent(footerTargetId)}#strokes">Stroke Diagnostics</a></li>
+                <li><a href="player.html?id=${encodeURIComponent(footerTargetId)}#drills">Personal Drills</a></li>
+                <li><a href="player.html?id=${encodeURIComponent(footerTargetId)}#videos">Video Catalog</a></li>
               </ul>
             </div>
           </div>
@@ -406,16 +414,16 @@
     const auth = window.NL_AUTH;
     const user = auth ? auth.getUser() : null;
 
-    // Route Protection: Prompt for sign-in only if auth is explicitly enforced and not demo mode
-    const authConfig = (window.NL_CONFIG && window.NL_CONFIG.auth) || {};
-    if (auth && authConfig.demoMode === false && !auth.isAuthenticated()) {
-      return auth.renderLockScreen(root, "unauthenticated");
-    }
-
     // Default to the logged-in student's profile if no id specified, or first player for coach
     const requestedId = params.get("id") || (user && user.playerId !== "all" ? user.playerId : C.players[0].id);
     const p = findPlayer(requestedId);
     if (!p) return renderNotFound(root, "Player not found");
+
+    // Route Protection: Require 6-digit access code when demoMode is false
+    const authConfig = (window.NL_CONFIG && window.NL_CONFIG.auth) || {};
+    if (auth && authConfig.demoMode === false && !auth.isAuthenticated()) {
+      return auth.renderLockScreen(root, "unauthenticated", p);
+    }
 
     // Per-Player Access Enforcement: Students can only view their own profile; Coach can view all
     if (!auth.canAccessPlayer(p.id)) {
@@ -437,13 +445,15 @@
       return s ? s.src : p.cover;
     };
 
-    const otherPlayers = C.players.filter((x) => x.id !== p.id);
+    const showFullRoster = !user || user.role === "coach" || authConfig.demoMode === true;
+    const otherPlayers = showFullRoster ? C.players.filter((x) => x.id !== p.id) : [];
 
     root.innerHTML = `
       <section class="p-hero" id="overview">
         <div class="container">
+          ${showFullRoster ? `
           <div class="player-roster-bar" aria-label="Student profile switcher">
-            <span class="player-roster-bar__label">Student Roster:</span>
+            <span class="player-roster-bar__label">Coach Roster:</span>
             <div class="player-roster-bar__pills">
               ${C.players
                 .map(
@@ -456,7 +466,7 @@
                 )
                 .join("")}
             </div>
-          </div>
+          </div>` : ""}
 
           <div class="p-hero__grid">
             <div class="p-hero__text">

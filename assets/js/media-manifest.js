@@ -159,5 +159,97 @@ window.NL_MEDIA = {
   "students/Sebastian/Videos/forehand on the run.mov": {
     "poster": "assets/media/posters/sebastian-videos-forehand-on-the-run.jpg",
     "duration": 16
+  },
+  "students/Tara McLaren/videos/backhand on the run (side view).mp4": {
+    "poster": "assets/media/posters/tara-mclaren-videos-backhand-on-the-run-side-view.jpg",
+    "duration": 20
+  },
+  "students/Tara McLaren/videos/backhand on the run (side view).mov": {
+    "poster": "assets/media/posters/tara-mclaren-videos-backhand-on-the-run-side-view.jpg",
+    "duration": 20
+  },
+  "students/Tara McLaren/videos/backhand sideview.mp4": {
+    "poster": "assets/media/posters/tara-mclaren-videos-backhand-sideview.jpg",
+    "duration": 13
+  },
+  "students/Tara McLaren/videos/backhand sideview.mov": {
+    "poster": "assets/media/posters/tara-mclaren-videos-backhand-sideview.jpg",
+    "duration": 13
+  },
+  "students/Tara McLaren/videos/backhand volley.mp4": {
+    "poster": "assets/media/posters/tara-mclaren-videos-backhand-volley.jpg",
+    "duration": 11
+  },
+  "students/Tara McLaren/videos/backhand volley.mov": {
+    "poster": "assets/media/posters/tara-mclaren-videos-backhand-volley.jpg",
+    "duration": 11
+  },
+  "students/Tara McLaren/videos/forehand (side view).mp4": {
+    "poster": "assets/media/posters/tara-mclaren-videos-forehand-side-view.jpg",
+    "duration": 17
+  },
+  "students/Tara McLaren/videos/forehand (side view).mov": {
+    "poster": "assets/media/posters/tara-mclaren-videos-forehand-side-view.jpg",
+    "duration": 17
+  },
+  "students/Tara McLaren/videos/forehand on the run (front view).mp4": {
+    "poster": "assets/media/posters/tara-mclaren-videos-forehand-on-the-run-front-view.jpg",
+    "duration": 21
+  },
+  "students/Tara McLaren/videos/forehand on the run (front view).mov": {
+    "poster": "assets/media/posters/tara-mclaren-videos-forehand-on-the-run-front-view.jpg",
+    "duration": 21
+  },
+  "students/Tara McLaren/videos/forehand on the run (side view).mp4": {
+    "poster": "assets/media/posters/tara-mclaren-videos-forehand-on-the-run-side-view.jpg",
+    "duration": 21
+  },
+  "students/Tara McLaren/videos/forehand on the run (side view).mov": {
+    "poster": "assets/media/posters/tara-mclaren-videos-forehand-on-the-run-side-view.jpg",
+    "duration": 21
+  },
+  "students/Tara McLaren/videos/forehand standing (front view).mp4": {
+    "poster": "assets/media/posters/tara-mclaren-videos-forehand-standing-front-view.jpg",
+    "duration": 20
+  },
+  "students/Tara McLaren/videos/forehand standing (front view).mov": {
+    "poster": "assets/media/posters/tara-mclaren-videos-forehand-standing-front-view.jpg",
+    "duration": 20
+  },
+  "students/Tara McLaren/videos/forehand volley.mp4": {
+    "poster": "assets/media/posters/tara-mclaren-videos-forehand-volley.jpg",
+    "duration": 11
+  },
+  "students/Tara McLaren/videos/forehand volley.mov": {
+    "poster": "assets/media/posters/tara-mclaren-videos-forehand-volley.jpg",
+    "duration": 11
+  },
+  "students/Tara McLaren/videos/overhead (side view).mp4": {
+    "poster": "assets/media/posters/tara-mclaren-videos-overhead-side-view.jpg",
+    "duration": 16
+  },
+  "students/Tara McLaren/videos/overhead (side view).mov": {
+    "poster": "assets/media/posters/tara-mclaren-videos-overhead-side-view.jpg",
+    "duration": 16
+  },
+  "students/Tara McLaren/videos/overhead.mp4": {
+    "poster": "assets/media/posters/tara-mclaren-videos-overhead.jpg",
+    "duration": 16
+  },
+  "students/Tara McLaren/videos/overhead.mov": {
+    "poster": "assets/media/posters/tara-mclaren-videos-overhead.jpg",
+    "duration": 16
+  },
+  "students/Tara McLaren/videos/serve (frontt view).mp4": {
+    "poster": "assets/media/posters/tara-mclaren-videos-serve-frontt-view.jpg",
+    "duration": 34
+  },
+  "students/Tara McLaren/videos/serve (frontt view).mov": {
+    "poster": "assets/media/posters/tara-mclaren-videos-serve-frontt-view.jpg",
+    "duration": 34
+  },
+  "students/Tara McLaren/videos/serve (side view).mp4": {
+    "poster": "assets/media/posters/tara-mclaren-videos-serve-side-view.jpg",
+    "duration": 30
   }
 };

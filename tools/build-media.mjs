@@ -99,6 +99,7 @@ const bigImages = [
   ["students/Sayf B/profile/sayf-profile.png", "sayf-portrait.jpg", 1000],
   ["students/Max/Profile/max-profile.png", "max-portrait.jpg", 1000],
   ["students/Sebastian/Profile/sebastian-profile.png", "sebastian-portrait.jpg", 1000],
+  ["students/Tara McLaren/Profile/tara-profile.png", "tara-portrait.jpg", 1000],
 ];
 for (const [src, name, w] of bigImages) {
   const out = join(OUT, name);

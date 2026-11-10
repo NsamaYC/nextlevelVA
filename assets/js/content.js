@@ -10,6 +10,7 @@
   const S = "students/Sayf B";
   const MX = "students/Max";
   const SB = "students/Sebastian";
+  const TM = "students/Tara McLaren";
 
   window.NL_CONTENT = {
     brand: {
@@ -579,13 +580,13 @@
       },
 
       /* =====================================================================
-         MAX G
+         MAX MELGAREJO GAMIZ
          ===================================================================== */
       {
         id: "max-g",
-        name: "Max G",
+        name: "Max Melgarejo Gamiz",
         firstName: "Max",
-        lastName: "G",
+        lastName: "Melgarejo Gamiz",
         cover: `${MX}/Profile/max-cover.png`,
         portrait: "assets/media/max-portrait.jpg",
         portraitFallback: `${MX}/Profile/max-profile.png`,
@@ -696,13 +697,13 @@
       },
 
       /* =====================================================================
-         SEBASTIAN G
+         SEBASTIAN MELGAREJO GAMIZ
          ===================================================================== */
       {
         id: "sebastian-g",
-        name: "Sebastian G",
+        name: "Sebastian Melgarejo Gamiz",
         firstName: "Sebastian",
-        lastName: "G",
+        lastName: "Melgarejo Gamiz",
         cover: `${SB}/Profile/sebastian-cover.png`,
         portrait: "assets/media/sebastian-portrait.jpg",
         portraitFallback: `${SB}/Profile/sebastian-profile.png`,
@@ -814,6 +815,286 @@
                 ],
                 footnote:
                   "Main Focus: Bigger shoulder turn, full follow-through, better hip rotation, and explosive recovery footwork.",
+              },
+            ],
+          },
+        ],
+      },
+
+      /* =====================================================================
+         TARA MCLAREN
+         ===================================================================== */
+      {
+        id: "tara-m",
+        name: "Tara McLaren",
+        firstName: "Tara",
+        lastName: "McLaren",
+        cover: `${TM}/Profile/tara-cover.png`,
+        portrait: "assets/media/tara-portrait.jpg",
+        portraitFallback: `${TM}/Profile/tara-profile.png`,
+        portraitPosition: "50% 35%",
+        slideshow: [
+          { src: `${TM}/Profile/slideshow/tara-forehand-front.png`, caption: "Forehand — Standing (Front View)" },
+          { src: `${TM}/Profile/slideshow/tara-forehand-side.png`, caption: "Forehand — Side View" },
+          { src: `${TM}/Profile/slideshow/tara-forehand-run.png`, caption: "Forehand on the Run" },
+          { src: `${TM}/Profile/slideshow/tara-backhand.png`, caption: "Backhand — Side View" },
+          { src: `${TM}/Profile/slideshow/tara-backhand-run.png`, caption: "Backhand on the Run" },
+          { src: `${TM}/Profile/slideshow/tara-volley.png`, caption: "Forehand Volley" },
+          { src: `${TM}/Profile/slideshow/tara-overhead.png`, caption: "Overhead — Side View" },
+          { src: `${TM}/Profile/slideshow/tara-serve.png`, caption: "Serve — Side View" },
+        ],
+        videos: [
+          { src: `${TM}/videos/forehand standing (front view).mp4`, title: "Forehand — Standing", tag: "Front View" },
+          { src: `${TM}/videos/forehand (side view).mp4`, title: "Forehand", tag: "Side View" },
+          { src: `${TM}/videos/forehand on the run (front view).mp4`, title: "Forehand on the Run", tag: "Front View" },
+          { src: `${TM}/videos/forehand on the run (side view).mp4`, title: "Forehand on the Run", tag: "Side View" },
+          { src: `${TM}/videos/backhand sideview.mp4`, title: "Backhand", tag: "Side View" },
+          { src: `${TM}/videos/backhand on the run (side view).mp4`, title: "Backhand on the Run", tag: "Side View" },
+          { src: `${TM}/videos/forehand volley.mp4`, title: "Forehand Volley", tag: "Net Play" },
+          { src: `${TM}/videos/backhand volley.mp4`, title: "Backhand Volley", tag: "Net Play" },
+          { src: `${TM}/videos/overhead (side view).mp4`, title: "Overhead", tag: "Side View" },
+          { src: `${TM}/videos/serve (frontt view).mp4`, title: "Serve", tag: "Front View" },
+          { src: `${TM}/videos/serve (side view).mp4`, title: "Serve", tag: "Side View" },
+        ],
+        drills: [
+          {
+            id: "forehand-standing-front-view",
+            title: "Forehand – Standing (Front View)",
+            category: "Forehand",
+            view: "Front View",
+            video: `${TM}/videos/forehand standing (front view).mp4`,
+            overview:
+              "Tara – Forehand – Standing (Front View): Leg Drive, Hip & Foot Rotation, Forward Extension & Follow-Through.",
+            sections: [
+              {
+                eyebrow: "Technical Focus",
+                title: "Forehand – Standing (Front View)",
+                cards: [
+                  { label: "Leg Drive", text: "Back leg is lifting too early. Needs to stay grounded longer and generate power from the legs instead of just swinging with the arm." },
+                  { label: "Hip & Foot Rotation", text: "Needs to rotate with the back foot and hip after contact to transfer power into the ball." },
+                  { label: "Forward Extension", text: "She’s going straight up instead of driving through the ball. Needs to extend forward more after contact." },
+                  { label: "Follow-Through", text: "Racket is finishing too close to her ear. Needs to finish all the way across, with the edge of the racket tapping the back of her shoulder." },
+                ],
+              },
+            ],
+          },
+          {
+            id: "forehand-side-view",
+            title: "Forehand – Side View",
+            category: "Forehand",
+            view: "Side View",
+            video: `${TM}/videos/forehand (side view).mp4`,
+            overview:
+              "Tara – Forehand – Side View: Footwork & Balance, Racket Face, Forward Extension & Follow-Through.",
+            sections: [
+              {
+                eyebrow: "Technical Focus",
+                title: "Forehand – Side View",
+                cards: [
+                  { label: "Footwork & Balance", text: "Right foot is lifting too early while the left foot stays on the ground. Needs both feet grounded during preparation to generate power from the legs. Right foot should rotate instead of just dragging forward." },
+                  { label: "Racket Face", text: "Racket face opens up toward the sky at contact. Needs to keep the racket face more closed and controlled through contact." },
+                  { label: "Forward Extension", text: "Needs to extend through the ball, with the edge of the racket following the direction of the shot instead of opening the racket face upward." },
+                  { label: "Follow-Through", text: "Needs to finish the swing completely, with the edge of the racket tapping the back of her shoulder." },
+                ],
+              },
+            ],
+          },
+          {
+            id: "forehand-on-the-run-front-view",
+            title: "Forehand on the Run – Front View",
+            category: "Footwork",
+            view: "Front View",
+            video: `${TM}/videos/forehand on the run (front view).mp4`,
+            overview:
+              "Tara – Forehand on the Run – Front View: Footwork, Shoulder Turn, Leg Drive & Recovery.",
+            sections: [
+              {
+                eyebrow: "Dynamic Movement",
+                title: "Forehand on the Run – Front View",
+                cards: [
+                  { label: "Footwork", text: "Taking too many small steps. Needs bigger, wider steps to cover the court faster and get into position." },
+                  { label: "Shoulder Turn", text: "Shoulder rotation is too short. Needs a bigger shoulder turn to prepare the racket properly and generate more power." },
+                  { label: "Leg Drive", text: "Not using her legs enough. Power needs to come from the ground up, using the legs and hips instead of just the arm." },
+                  { label: "Recovery", text: "Needs to recover with a crossover step first, followed by bigger, wider shuffle steps to get back into position faster." },
+                ],
+              },
+            ],
+          },
+          {
+            id: "forehand-on-the-run-side-view",
+            title: "Forehand on the Run – Side View",
+            category: "Footwork",
+            view: "Side View",
+            video: `${TM}/videos/forehand on the run (side view).mp4`,
+            overview:
+              "Tara – Forehand on the Run – Side View: Footwork, Open Stance, Mogul Step & Recovery.",
+            sections: [
+              {
+                eyebrow: "Dynamic Movement",
+                title: "Forehand on the Run – Side View",
+                cards: [
+                  { label: "Footwork", text: "She’s closing her stance with the left foot while running to the ball. Needs to load on the outside (right) foot and hit with an open stance." },
+                  { label: "Open Stance", text: "Needs to use the outside leg for balance, stability, and power instead of stepping across with the left foot." },
+                  { label: "Mogul Step", text: "After contact, needs to use the mogul step to rotate her hips and feet while maintaining balance." },
+                  { label: "Recovery", text: "After the mogul step, recover with a crossover followed by shuffle steps to get back into position faster." },
+                ],
+              },
+            ],
+          },
+          {
+            id: "backhand-side-view",
+            title: "Backhand – Side View",
+            category: "Backhand",
+            view: "Side View",
+            video: `${TM}/videos/backhand sideview.mp4`,
+            overview:
+              "Tara – Backhand – Side View: Shoulder Turn, Racket Preparation, Racket Drop, Wrist Control & Extension & Follow-Through.",
+            sections: [
+              {
+                eyebrow: "Technical Focus",
+                title: "Backhand – Side View",
+                cards: [
+                  { label: "Shoulder Turn", text: "Needs to start the preparation by turning her shoulders more instead of using just her arms and wrists." },
+                  { label: "Racket Preparation", text: "Racket is too low during preparation. Needs to keep the elbows more extended and the racket pointing up before starting the swing." },
+                  { label: "Racket Drop", text: "After preparing with the racket up, needs to let the racket drop naturally before accelerating forward." },
+                  { label: "Wrist Control", text: "Too much wrist movement and slapping at the ball. Needs to keep the wrists stable and use her arms, shoulders, and body rotation to generate power." },
+                  { label: "Extension & Follow-Through", text: "Needs to extend both arms forward through contact instead of cutting the swing short. Finish higher with a complete follow-through." },
+                ],
+              },
+            ],
+          },
+          {
+            id: "backhand-on-the-run-side-view",
+            title: "Backhand on the Run – Side View",
+            category: "Footwork",
+            view: "Side View",
+            video: `${TM}/videos/backhand on the run (side view).mp4`,
+            overview:
+              "Tara – Backhand on the Run – Side View: Early Preparation, Shoulder Turn, Racket Preparation, Wrist Control & Follow-Through.",
+            sections: [
+              {
+                eyebrow: "Dynamic Movement",
+                title: "Backhand on the Run – Side View",
+                cards: [
+                  { label: "Early Preparation", text: "She’s waiting until the ball bounces to prepare. Needs to turn her shoulders and get the racket up immediately, before running toward the ball." },
+                  { label: "Shoulder Turn", text: "Needs a full shoulder turn as soon as she recognizes the direction of the ball, then move with the racket prepared." },
+                  { label: "Racket Preparation", text: "Racket is too low. Needs to keep the elbows more extended and the racket pointing up before dropping it into the swing." },
+                  { label: "Wrist Control", text: "Too much wrist slapping instead of using her arms and body rotation. Needs to keep the wrists stable and extend through the ball." },
+                  { label: "Follow-Through", text: "Needs to extend forward after contact and finish higher with a complete follow-through." },
+                ],
+              },
+            ],
+          },
+          {
+            id: "forehand-volley",
+            title: "Forehand Volley – Video Analysis",
+            category: "Volley",
+            view: "Net Play",
+            video: `${TM}/videos/forehand volley.mp4`,
+            overview:
+              "Tara – Forehand Volley – Video Analysis: Shoulder Turn, Racket Position & Racket Face.",
+            sections: [
+              {
+                eyebrow: "Net Play",
+                title: "Forehand Volley – Video Analysis",
+                cards: [
+                  { label: "Shoulder Turn", text: "Excellent shoulder rotation and preparation. She’s turning correctly and getting into position early." },
+                  { label: "Racket Position", text: "Very good racket position in front of the body, with the left hand staying close to the racket." },
+                  { label: "Racket Face", text: "Sometimes the racket face is a little too closed. Needs to open it slightly to create better control and depth." },
+                ],
+                footnote:
+                  "Overall: Almost perfect forehand volley! Very close to professional-level technique. Excellent preparation, positioning, and control. Great job!",
+              },
+            ],
+          },
+          {
+            id: "backhand-volley",
+            title: "Backhand Volley – Video Analysis",
+            category: "Volley",
+            view: "Net Play",
+            video: `${TM}/videos/backhand volley.mp4`,
+            overview:
+              "Tara – Backhand Volley – Video Analysis: Racket Preparation, Contact & Extension, and Follow-Through.",
+            sections: [
+              {
+                eyebrow: "Net Play",
+                title: "Backhand Volley – Video Analysis",
+                cards: [
+                  { label: "Racket Preparation", text: "She’s holding the racket with two hands and then switching to a one-handed volley. Needs to keep her left hand on the throat of the racket during preparation." },
+                  { label: "Contact & Extension", text: "Hit the volley with one hand, keeping the racket head up and extending forward through the ball." },
+                  { label: "Follow-Through", text: "After contact, the hands should separate naturally, with the racket head staying up and controlled." },
+                ],
+              },
+            ],
+          },
+          {
+            id: "overhead",
+            title: "Overhead – Video Analysis",
+            category: "Overhead",
+            view: "Side View",
+            video: `${TM}/videos/overhead (side view).mp4`,
+            overview:
+              "Tara – Overhead – Video Analysis: Footwork, Racket Preparation, Elbow Position, Throwing Motion & Contact & Extension.",
+            sections: [
+              {
+                eyebrow: "Overhead Mechanics",
+                title: "Overhead – Video Analysis",
+                cards: [
+                  { label: "Footwork", text: "Needs to start moving back with a crossover step instead of backpedaling. Turn sideways immediately and use crossover steps to get behind the ball." },
+                  { label: "Racket Preparation", text: "She’s opening the racket face too early, with the strings pointing toward the sky. Needs to keep the racket up with the edge leading instead of opening the strings." },
+                  { label: "Elbow Position", text: "Needs to keep the elbow bent and closer to the body during the initial preparation, like she’s getting ready to throw a ball." },
+                  { label: "Throwing Motion", text: "Prepare with the racket pointing up and the racket face closed, then let the racket drop naturally before accelerating up toward the ball." },
+                  { label: "Contact & Extension", text: "Reach up high, extend through contact, and finish the overhead with a complete follow-through." },
+                ],
+                footnote:
+                  "Overall: Focus on early crossover steps, keeping the racket edge up during preparation, and developing a natural throwing motion instead of opening the racket face too early.",
+              },
+            ],
+          },
+          {
+            id: "serve-front-view",
+            title: "Serve – Front View",
+            category: "Serve",
+            view: "Front View",
+            video: `${TM}/videos/serve (frontt view).mp4`,
+            overview:
+              "Tara – Serve – Front View: Pronation, Technique, Leg Drive & Jump, Hip Rotation & Right Leg Hook.",
+            sections: [
+              {
+                eyebrow: "Serve Mechanics",
+                title: "Serve – Front View",
+                cards: [
+                  { label: "Pronation", text: "Very good pronation! She’s rotating the forearm and racket correctly through contact, generating good racket-head speed." },
+                  { label: "Technique", text: "Overall, very good serve mechanics. She has a solid foundation and is doing a lot of things correctly." },
+                  { label: "Leg Drive & Jump", text: "She’s lifting her right foot slightly. Next step is to use more leg drive and implement a stronger jump into the serve." },
+                  { label: "Hip Rotation", text: "Needs to rotate the hips more as she drives up toward the ball to generate additional power." },
+                  { label: "Right Leg Hook", text: "After jumping, needs to hook the right leg behind her to maintain balance and control during the landing." },
+                ],
+                footnote:
+                  "Overall: Great job on the serve! Her technique and pronation are very good. We’ll focus on adding more leg drive, jump, and hip rotation to take her serve to the next level.",
+              },
+            ],
+          },
+          {
+            id: "serve-side-view",
+            title: "Serve – Side View",
+            category: "Serve",
+            view: "Side View",
+            video: `${TM}/videos/serve (side view).mp4`,
+            overview:
+              "Tara – Serve – Side View: Pronation, Ball Toss, Racket Preparation & Timing & Rhythm.",
+            sections: [
+              {
+                eyebrow: "Serve Mechanics",
+                title: "Serve – Side View",
+                cards: [
+                  { label: "Pronation", text: "Very good pronation overall. She’s already doing it correctly, just needs a little more forearm rotation through contact to maximize racket-head speed." },
+                  { label: "Ball Toss", text: "Needs to initiate the ball toss first before bringing the racket up into preparation." },
+                  { label: "Racket Preparation", text: "Delay the racket going up slightly. Let the tossing arm lead while the racket lags behind to create better timing and rhythm." },
+                  { label: "Timing & Rhythm", text: "Focus on a smoother sequence between the toss, racket preparation, and acceleration toward the ball." },
+                ],
+                footnote:
+                  "Overall: Very good serve technique! Just a few small adjustments with pronation and racket timing to make the serve even better.",
               },
             ],
           },
